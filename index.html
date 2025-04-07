@@ -14,6 +14,8 @@
             --text-light: #ffffff;
             --text-muted: #a0a0a0;
             --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f9d423 100%);
+            --error-red: #ef4444;
+            --success-green: #10b981;
         }
 
         body {
@@ -38,6 +40,16 @@
             width: 90%;
             position: relative;
             overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .verification-container::before {
@@ -73,6 +85,43 @@
             border-radius: 20px;
             padding: 15px;
             background: rgba(0, 0, 0, 0.2);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1);
+        }
+
+        .verification-status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .status-icon {
+            font-size: 1.2em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--gradient-gold);
+            width: 0%;
+            transition: width 1.5s ease;
         }
 
         #verify-btn {
@@ -86,6 +135,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             margin-top: 20px;
+            display: none;
         }
 
         #verify-btn:hover {
@@ -115,13 +165,63 @@
         }
 
         #error-message {
-            color: #ef4444;
+            color: var(--error-red);
             margin-top: 15px;
             display: none;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(239, 68, 68, 0.1);
         }
 
         .grecaptcha-badge {
             visibility: hidden;
+        }
+
+        .footer-links {
+            font-size: 0.8em;
+            margin-top: 20px;
+            color: var(--text-muted);
+        }
+
+        .footer-links a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+
+        .status-steps {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .status-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .status-step.active {
+            opacity: 1;
+        }
+
+        .step-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
         }
     </style>
 </head>
@@ -131,29 +231,82 @@
         <h1>Welcome to RecoGenie</h1>
         <p>Please wait while we verify your browser...</p>
         
+        <div class="progress-bar">
+            <div class="progress-bar-fill" id="progress-bar"></div>
+        </div>
+
+        <ul class="status-steps">
+            <li class="status-step" id="step1">
+                <div class="step-icon">1</div>
+                <span>Initializing verification</span>
+            </li>
+            <li class="status-step" id="step2">
+                <div class="step-icon">2</div>
+                <span>Checking browser security</span>
+            </li>
+            <li class="status-step" id="step3">
+                <div class="step-icon">3</div>
+                <span>Verifying request</span>
+            </li>
+        </ul>
+        
         <div class="loading" id="loading">
             <div></div>
         </div>
 
-        <div id="error-message">Verification failed. Please try again.</div>
+        <div id="error-message">
+            Verification failed. This could be due to:
+            <br>- Temporary network issues
+            <br>- Browser security settings
+            <br>Please try again or refresh the page.
+        </div>
         
-        <button id="verify-btn" onclick="verifyAndRedirect()">Enter Website</button>
+        <button id="verify-btn" onclick="verifyAndRedirect()">Try Again</button>
         
-        <p style="font-size: 0.8em; margin-top: 20px;">
+        <p class="footer-links">
             This site is protected by reCAPTCHA and the Google
-            <a href="https://policies.google.com/privacy" style="color: var(--accent-gold);">Privacy Policy</a> and
-            <a href="https://policies.google.com/terms" style="color: var(--accent-gold);">Terms of Service</a> apply.
+            <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+            <a href="https://policies.google.com/terms">Terms of Service</a> apply.
         </p>
     </div>
 
     <script>
         window.onload = function() {
             document.getElementById('loading').style.display = 'block';
-            document.getElementById('verify-btn').style.display = 'none';
+            startVerification();
+        }
+
+        function updateProgress(step) {
+            const steps = {
+                1: 33,
+                2: 66,
+                3: 100
+            };
             
-            grecaptcha.ready(function() {
-                verifyAndRedirect();
-            });
+            document.getElementById('progress-bar').style.width = steps[step] + '%';
+            
+            // Update step indicators
+            for (let i = 1; i <= 3; i++) {
+                const stepEl = document.getElementById('step' + i);
+                if (i <= step) {
+                    stepEl.classList.add('active');
+                } else {
+                    stepEl.classList.remove('active');
+                }
+            }
+        }
+
+        function startVerification() {
+            updateProgress(1);
+            
+            setTimeout(() => {
+                updateProgress(2);
+                
+                grecaptcha.ready(function() {
+                    updateProgress(3);
+                    verifyAndRedirect();
+                });
+            }, 1000);
         }
 
         function verifyAndRedirect() {
@@ -164,12 +317,18 @@
                 setTimeout(() => {
                     document.getElementById('loading').style.display = 'none';
                     window.location.href = 'home.html';
-                }, 1500);
+                }, 1000);
             })
             .catch(function(error) {
                 document.getElementById('loading').style.display = 'none';
+                document.getElementById('progress-bar').style.width = '0%';
                 document.getElementById('error-message').style.display = 'block';
                 document.getElementById('verify-btn').style.display = 'block';
+                
+                // Reset step indicators
+                for (let i = 1; i <= 3; i++) {
+                    document.getElementById('step' + i).classList.remove('active');
+                }
             });
         }
     </script>
