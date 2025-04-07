@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RecoGenie - Verification</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeA0AwrAAAAAChAXOPmnz7xHqkJbWAcvvYYgelt"></script>
     <style>
         :root {
             --primary-dark: #1a1a1a;
@@ -75,12 +75,6 @@
             background: rgba(0, 0, 0, 0.2);
         }
 
-        .captcha-container {
-            display: flex;
-            justify-content: center;
-            margin: 30px 0;
-        }
-
         #verify-btn {
             background: var(--gradient-gold);
             color: var(--primary-dark);
@@ -92,13 +86,6 @@
             cursor: pointer;
             transition: all 0.3s ease;
             margin-top: 20px;
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        #verify-btn.active {
-            opacity: 1;
-            pointer-events: all;
         }
 
         #verify-btn:hover {
@@ -132,53 +119,58 @@
             margin-top: 15px;
             display: none;
         }
+
+        .grecaptcha-badge {
+            visibility: hidden;
+        }
     </style>
 </head>
 <body>
     <div class="verification-container">
         <img src="launch-ai-agents.png" alt="RecoGenie Logo" class="logo">
         <h1>Welcome to RecoGenie</h1>
-        <p>Please complete the verification below to access our website.</p>
-        
-        <div class="captcha-container">
-            <div class="g-recaptcha" 
-                data-sitekey="6LeA0AwrAAAAAChAXOPmnz7xHqkJbWAcvvYYgelt" 
-                data-callback="enableButton"
-                data-theme="dark"></div>
-        </div>
-
-        <div id="error-message">Please complete the CAPTCHA verification.</div>
+        <p>Please wait while we verify your browser...</p>
         
         <div class="loading" id="loading">
             <div></div>
         </div>
 
+        <div id="error-message">Verification failed. Please try again.</div>
+        
         <button id="verify-btn" onclick="verifyAndRedirect()">Enter Website</button>
+        
+        <p style="font-size: 0.8em; margin-top: 20px;">
+            This site is protected by reCAPTCHA and the Google
+            <a href="https://policies.google.com/privacy" style="color: var(--accent-gold);">Privacy Policy</a> and
+            <a href="https://policies.google.com/terms" style="color: var(--accent-gold);">Terms of Service</a> apply.
+        </p>
     </div>
 
     <script>
-        function enableButton() {
-            document.getElementById('verify-btn').classList.add('active');
-            document.getElementById('error-message').style.display = 'none';
+        window.onload = function() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('verify-btn').style.display = 'none';
+            
+            grecaptcha.ready(function() {
+                verifyAndRedirect();
+            });
         }
 
         function verifyAndRedirect() {
-            const response = grecaptcha.getResponse();
-            if (response.length === 0) {
+            grecaptcha.execute('6LeA0AwrAAAAAChAXOPmnz7xHqkJbWAcvvYYgelt', {action: 'submit'})
+            .then(function(token) {
+                // In a real implementation, you would verify this token on your server
+                // For this demo, we'll simulate a successful verification
+                setTimeout(() => {
+                    document.getElementById('loading').style.display = 'none';
+                    window.location.href = 'home.html';
+                }, 1500);
+            })
+            .catch(function(error) {
+                document.getElementById('loading').style.display = 'none';
                 document.getElementById('error-message').style.display = 'block';
-                return;
-            }
-
-            const loading = document.getElementById('loading');
-            const btn = document.getElementById('verify-btn');
-            
-            loading.style.display = 'block';
-            btn.style.display = 'none';
-
-            // Simulate verification process
-            setTimeout(() => {
-                window.location.href = 'home.html';
-            }, 1500);
+                document.getElementById('verify-btn').style.display = 'block';
+            });
         }
     </script>
 </body>
