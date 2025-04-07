@@ -1,166 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RecoGenie - AI Agents Launch</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
-  <style>
-    :root {
-      --primary-dark: #1a1a1a;
-      --secondary-dark: #2d2d2d;
-      --accent-gold: #d4af37;
-      --text-light: #ffffff;
-      --text-muted: #a0a0a0;
-      --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f9d423 100%);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecoGenie - Verification</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        :root {
+            --primary-dark: #1a1a1a;
+            --secondary-dark: #2d2d2d;
+            --accent-gold: #d4af37;
+            --text-light: #ffffff;
+            --text-muted: #a0a0a0;
+            --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f9d423 100%);
+        }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--primary-dark);
-      color: var(--text-light);
-      text-align: center;
-      padding: 40px;
-      line-height: 1.6;
-    }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    nav {
-      margin-bottom: 60px;
-      padding: 20px 0;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-    }
+        .verification-container {
+            background: var(--secondary-dark);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            overflow: hidden;
+        }
 
-    nav a {
-      color: var(--text-light);
-      text-decoration: none;
-      margin: 0 25px;
-      font-size: 1.1em;
-      font-weight: 500;
-      transition: color 0.3s ease;
-      position: relative;
-    }
+        .verification-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-gold);
+        }
 
-    nav a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -5px;
-      left: 0;
-      background: var(--gradient-gold);
-      transition: width 0.3s ease;
-    }
+        h1 {
+            margin: 0 0 20px;
+            font-size: 2.5em;
+            font-weight: 700;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    nav a:hover::after {
-      width: 100%;
-    }
+        p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
 
-    h1 {
-      color: var(--text-light);
-      font-size: 3.5em;
-      font-weight: 700;
-      margin-bottom: 30px;
-      background: var(--gradient-gold);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+        }
 
-    p {
-      color: var(--text-muted);
-      font-size: 1.2em;
-      margin-bottom: 30px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+        .captcha-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
 
-    .content-card {
-      background: var(--secondary-dark);
-      border-radius: 16px;
-      padding: 40px;
-      margin: 40px auto;
-      max-width: 1200px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease;
-    }
+        #verify-btn {
+            background: var(--gradient-gold);
+            color: var(--primary-dark);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            opacity: 0.6;
+            pointer-events: none;
+        }
 
-    .content-card:hover {
-      transform: translateY(-5px);
-    }
+        #verify-btn.active {
+            opacity: 1;
+            pointer-events: all;
+        }
 
-    img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 16px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease;
-    }
+        #verify-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
 
-    img:hover {
-      transform: scale(1.02);
-    }
+        .loading {
+            display: none;
+            margin: 20px 0;
+        }
 
-    video {
-      max-width: 100%;
-      height: auto;
-      border-radius: 16px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      margin: 30px 0;
-    }
+        .loading div {
+            width: 30px;
+            height: 30px;
+            border: 3px solid var(--accent-gold);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
 
-    .btn {
-      margin-top: 40px;
-      display: inline-block;
-      background: var(--gradient-gold);
-      color: var(--primary-dark);
-      padding: 16px 32px;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 1.1em;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-    }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
-    }
-
-    @media (max-width: 768px) {
-      body {
-        padding: 20px;
-      }
-      
-      h1 {
-        font-size: 2.5em;
-      }
-      
-      .content-card {
-        padding: 20px;
-      }
-    }
-  </style>
+        #error-message {
+            color: #ef4444;
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="verify.html">Contact</a>
-  </nav>
+    <div class="verification-container">
+        <img src="launch-ai-agents.png" alt="RecoGenie Logo" class="logo">
+        <h1>Welcome to RecoGenie</h1>
+        <p>Please complete the verification below to access our website.</p>
+        
+        <div class="captcha-container">
+            <div class="g-recaptcha" 
+                data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" 
+                data-callback="enableButton"
+                data-theme="dark"></div>
+        </div>
 
-  <div class="content-card">
-    <h1>We're Launching AI Agents!</h1>
-    <p>RecoGenie is bringing intelligent automation to help your business grow. Stay tuned.</p>
-    <p>Our main target is SME's</p>
-    <img src="image1.png" alt="Launching AI Agents" />
-    <br>
-    <video controls>
-      <source src="company_video.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <br>
-    <a href="verify.html" class="btn">Get in Touch</a>
-  </div>
+        <div id="error-message">Please complete the CAPTCHA verification.</div>
+        
+        <div class="loading" id="loading">
+            <div></div>
+        </div>
+
+        <button id="verify-btn" onclick="verifyAndRedirect()">Enter Website</button>
+    </div>
+
+    <script>
+        function enableButton() {
+            document.getElementById('verify-btn').classList.add('active');
+            document.getElementById('error-message').style.display = 'none';
+        }
+
+        function verifyAndRedirect() {
+            const response = grecaptcha.getResponse();
+            if (response.length === 0) {
+                document.getElementById('error-message').style.display = 'block';
+                return;
+            }
+
+            const loading = document.getElementById('loading');
+            const btn = document.getElementById('verify-btn');
+            
+            loading.style.display = 'block';
+            btn.style.display = 'none';
+
+            // Simulate verification process
+            setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 1500);
+        }
+    </script>
 </body>
-</html>
+</html> 
