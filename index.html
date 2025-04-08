@@ -4,6 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RecoGenie - Verification</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JW3Y07BQDS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JW3Y07BQDS');
+    </script>
+    <script>
+        // Track page load time
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                var pageLoadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+                gtag('event', 'page_load_time', {
+                    'event_category': 'Performance',
+                    'event_label': 'Landing Page',
+                    'value': pageLoadTime
+                });
+            }, 0);
+        });
+        
+        // Track user engagement (time on page)
+        var startTime = Date.now();
+        var engagementInterval = 15000; // 15 seconds
+        var engagementTimer = setInterval(function() {
+            gtag('event', 'user_engagement', {
+                'event_category': 'Engagement',
+                'event_label': 'Landing Page',
+                'value': Math.floor((Date.now() - startTime) / 1000)
+            });
+        }, engagementInterval);
+        
+        // Clean up timer when user leaves the page
+        window.addEventListener('beforeunload', function() {
+            clearInterval(engagementTimer);
+            // Final engagement tracking before leaving
+            gtag('event', 'total_time_on_page', {
+                'event_category': 'Engagement',
+                'event_label': 'Landing Page',
+                'value': Math.floor((Date.now() - startTime) / 1000)
+            });
+        });
+        
+        // Add event listeners to buttons when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track all button clicks
+            document.querySelectorAll('button, .btn, a.button, [role="button"]').forEach(function(button) {
+                button.addEventListener('click', function(e) {
+                    var buttonText = this.textContent.trim();
+                    var buttonId = this.id || 'unnamed-button';
+                    gtag('event', 'button_click', {
+                        'event_category': 'Engagement',
+                        'event_label': buttonText || buttonId,
+                        'page_location': 'Landing Page'
+                    });
+                });
+            });
+            
+            // Track specific form submissions
+            var forms = document.querySelectorAll('form');
+            forms.forEach(function(form) {
+                form.addEventListener('submit', function(e) {
+                    gtag('event', 'form_submission', {
+                        'event_category': 'Engagement',
+                        'event_label': form.id || 'unnamed-form',
+                        'page_location': 'Landing Page'
+                    });
+                });
+            });
+        });
+    </script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <script src="https://www.google.com/recaptcha/api.js?render=6LeA0AwrAAAAAChAXOPmnz7xHqkJbWAcvvYYgelt"></script>
     <style>
