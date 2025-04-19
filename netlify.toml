@@ -1,0 +1,16 @@
+[build]
+  command = "pip install -r requirements.txt && uvicorn chatbot_api:app --host 0.0.0.0 --port $PORT"
+  publish = "static"
+
+[build.environment]
+  PYTHON_VERSION = "3.9"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+[[headers]]
+  for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*" 

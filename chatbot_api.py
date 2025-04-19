@@ -8,7 +8,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-import faiss
+from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 import openai
 from collections import defaultdict
@@ -44,7 +44,7 @@ model = SentenceTransformer('all-MiniLM-L6-v2')
 CHUNK_SIZE = 250  # tokens (approximate)
 MAX_HISTORY = 5
 LEADS_FILE = "leads.json"
-CONTACT_EMAIL = "hello@recogenie.com"
+CONTACT_EMAIL = os.getenv("CONTACT_EMAIL", "hello@recogenie.com")
 
 # System message to restrict responses
 SYSTEM_MESSAGE = """You are RecoGenie's AI assistant, powered by OpenAI. 
@@ -69,7 +69,6 @@ class LeadInfo(BaseModel):
 class RAGSystem:
     def __init__(self):
         self.documents = []
-        self.faiss_index = None
         self.embeddings = None
         self.load_documents()
         self.build_index()
@@ -121,32 +120,30 @@ class RAGSystem:
         return chunks
 
     def build_index(self):
-        """Build FAISS index from document chunks"""
+        """Build embeddings index from document chunks"""
         if not self.documents:
             print("Warning: No documents loaded")
             return
 
         # Create embeddings
         self.embeddings = model.encode(self.documents)
-        
-        # Initialize FAISS index
-        dimension = self.embeddings.shape[1]
-        self.faiss_index = faiss.IndexFlatL2(dimension)
-        self.faiss_index.add(self.embeddings.astype('float32'))
 
     def get_relevant_chunks(self, query: str, k: int = 3) -> List[str]:
         """Retrieve k most relevant chunks for the query"""
-        if not self.faiss_index:
+        if not self.embeddings is not None:
             return []
 
         # Get query embedding
-        query_embedding = model.encode([query])[0].reshape(1, -1)
+        query_embedding = model.encode([query])[0]
 
-        # Search in FAISS index
-        distances, indices = self.faiss_index.search(query_embedding.astype('float32'), k)
+        # Calculate similarities
+        similarities = cosine_similarity([query_embedding], self.embeddings)[0]
+        
+        # Get top k indices
+        top_indices = np.argsort(similarities)[-k:][::-1]
         
         # Return relevant chunks
-        return [self.documents[i] for i in indices[0]]
+        return [self.documents[i] for i in top_indices]
 
 # Initialize RAG system
 rag_system = RAGSystem()
