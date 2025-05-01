@@ -24,7 +24,7 @@
             });
         }, 0);
     });
-    
+
     // Track user engagement (time on page)
     var startTime = Date.now();
     var engagementInterval = 15000; // 15 seconds
@@ -35,23 +35,21 @@
             'value': Math.floor((Date.now() - startTime) / 1000)
         });
     }, engagementInterval);
-    
+
     // Clean up timer when user leaves the page
     window.addEventListener('beforeunload', function() {
         clearInterval(engagementTimer);
-        // Final engagement tracking before leaving
         gtag('event', 'total_time_on_page', {
             'event_category': 'Engagement',
             'event_label': 'Home Page',
             'value': Math.floor((Date.now() - startTime) / 1000)
         });
     });
-    
-    // Add event listeners to buttons when DOM is loaded
+
+    // Track button clicks
     document.addEventListener('DOMContentLoaded', function() {
-        // Track all button clicks
         document.querySelectorAll('button, .btn, a.button, [role="button"]').forEach(function(button) {
-            button.addEventListener('click', function(e) {
+            button.addEventListener('click', function() {
                 var buttonText = this.textContent.trim();
                 var buttonId = this.id || 'unnamed-button';
                 gtag('event', 'button_click', {
@@ -159,14 +157,6 @@
       transform: scale(1.02);
     }
 
-    video {
-      max-width: 100%;
-      height: auto;
-      border-radius: 16px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      margin: 30px 0;
-    }
-
     .btn {
       margin-top: 40px;
       display: inline-block;
@@ -190,11 +180,11 @@
       body {
         padding: 20px;
       }
-      
+
       h1 {
         font-size: 2.5em;
       }
-      
+
       .content-card {
         padding: 20px;
       }
@@ -214,10 +204,7 @@
     <p>Our main target is SME's</p>
     <img src="image1.png" alt="Launching AI Agents" />
     <br>
-    <video controls>
-      <source src="company_video.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+    <img src="moral.png" alt="Moral Message" />
     <br>
     <a href="mailto:hello@recogenie.com" class="btn">Get in Touch</a>
   </div>
