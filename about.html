@@ -2,198 +2,62 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About - RecoGenie</title>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JW3Y07BQDS"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-JW3Y07BQDS');
-  </script>
-  <script>
-    // Track page load time
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        var pageLoadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
-        gtag('event', 'page_load_time', {
-          'event_category': 'Performance',
-          'event_label': 'About Page',
-          'value': pageLoadTime
-        });
-      }, 0);
-    });
-    
-    // Track user engagement (time on page)
-    var startTime = Date.now();
-    var engagementInterval = 15000; // 15 seconds
-    var engagementTimer = setInterval(function() {
-      gtag('event', 'user_engagement', {
-        'event_category': 'Engagement',
-        'event_label': 'About Page',
-        'value': Math.floor((Date.now() - startTime) / 1000)
-      });
-    }, engagementInterval);
-    
-    // Clean up timer when user leaves the page
-    window.addEventListener('beforeunload', function() {
-      clearInterval(engagementTimer);
-      // Final engagement tracking before leaving
-      gtag('event', 'total_time_on_page', {
-        'event_category': 'Engagement',
-        'event_label': 'About Page',
-        'value': Math.floor((Date.now() - startTime) / 1000)
-      });
-    });
-    
-    // Add event listeners to buttons when DOM is loaded
-    document.addEventListener('DOMContentLoaded', function() {
-      // Track all button clicks
-      document.querySelectorAll('button, .btn, a.button, [role="button"]').forEach(function(button) {
-        button.addEventListener('click', function(e) {
-          var buttonText = this.textContent.trim();
-          var buttonId = this.id || 'unnamed-button';
-          gtag('event', 'button_click', {
-            'event_category': 'Engagement',
-            'event_label': buttonText || buttonId,
-            'page_location': 'About Page'
-          });
-        });
-      });
-    });
-  </script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About - RecoGenie™</title>
   <style>
-    :root {
-      --primary-dark: #1a1a1a;
-      --secondary-dark: #2d2d2d;
-      --accent-gold: #d4af37;
-      --text-light: #ffffff;
-      --text-muted: #a0a0a0;
-      --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f9d423 100%);
-    }
-
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--primary-dark);
-      color: var(--text-light);
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f9fc;
       text-align: center;
       padding: 40px;
-      line-height: 1.6;
     }
-
     nav {
-      margin-bottom: 60px;
-      padding: 20px 0;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+      margin-bottom: 40px;
     }
-
     nav a {
-      color: var(--text-light);
+      color: #2563eb;
       text-decoration: none;
-      margin: 0 25px;
+      margin: 0 15px;
       font-size: 1.1em;
-      font-weight: 500;
-      transition: color 0.3s ease;
-      position: relative;
     }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -5px;
-      left: 0;
-      background: var(--gradient-gold);
-      transition: width 0.3s ease;
+    nav a:hover {
+      color: #1e40af;
     }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
     h1 {
-      color: var(--text-light);
-      font-size: 3.5em;
-      font-weight: 700;
-      margin-bottom: 30px;
-      background: var(--gradient-gold);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #1e3a8a;
+      font-size: 3em;
     }
-
     p {
-      color: var(--text-muted);
+      color: #333;
       font-size: 1.2em;
       margin-bottom: 30px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
     }
-
-    .content-card {
-      background: var(--secondary-dark);
-      border-radius: 16px;
-      padding: 40px;
-      margin: 40px auto;
-      max-width: 1200px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease;
+    .footer {
+      margin-top: 60px;
+      font-size: 0.95em;
+      color: #555;
     }
-
-    .content-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .btn {
-      margin-top: 40px;
-      display: inline-block;
-      background: var(--gradient-gold);
-      color: var(--primary-dark);
-      padding: 16px 32px;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 1.1em;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
-    }
-
-    @media (max-width: 768px) {
-      body {
-        padding: 20px;
-      }
-      
-      h1 {
-        font-size: 2.5em;
-      }
-      
-      .content-card {
-        padding: 20px;
-      }
+    .trademark {
+      font-size: 0.5em;
+      vertical-align: super;
+      margin-left: 2px;
     }
   </style>
 </head>
 <body>
   <nav>
-    <a href="home.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="mailto:hello@recogenie.com">Contact</a>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
   </nav>
 
-  <div class="content-card">
-    <h1>About RecoGenie</h1>
-    <p>RecoGenie is at the forefront of AI innovation, developing intelligent agents that transform how businesses operate. Our mission is to make advanced AI technology accessible and practical for businesses of all sizes.</p>
-    <p>Our main target is SME's</p>
-    <p>We combine cutting-edge artificial intelligence with intuitive design to create solutions that drive real business value.</p>
-    <a href="mailto:hello@recogenie.com" class="btn">Contact Us</a>
+  <h1>RecoGenie<span class="trademark">™</span></h1>
+  <p>RecoGenie<span class="trademark">™</span> is a UK-registered AI technology company delivering personalized recommendation solutions.</p>
+
+  <div class="footer">
+    <p><strong>Registered Office:</strong><br>
+    Reco Genie<span class="trademark">™</span>, 483 Green Lanes, London, N13 4BS, United Kingdom</p>
+    <p>RecoGenie<span class="trademark">™</span> is a registered trademark in the United Kingdom.</p>
   </div>
 </body>
-</html> 
+</html>
