@@ -3,64 +3,88 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About – RecoGenie</title>
-
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-  <link rel="shortcut icon" href="deco-logo.png" />
+  <title>About – Reco Genie®</title>
 
   <style>
-    :root{--gold:#c7a550;--gold-light:#e2c77a;--bg:#0d1117;}
-    body{
-      font-family:"Segoe UI",sans-serif;margin:0;text-align:center;
-      background:var(--bg);color:#d1d5db;padding:40px;
+    /* ---- core palette ---- */
+    :root {
+      --brand-black: #000;
+      --brand-gold: #d4af37;
+      --text-body: #f4f4f4;
     }
-    header{display:flex;justify-content:center;align-items:center;
-            gap:28px;margin-bottom:40px;}
-    header img.logo{width:72px;height:auto;}
-    nav a{color:var(--gold);text-decoration:none;margin:0 14px;
-          font-size:1.05em;font-weight:600;}
-    nav a:hover{color:var(--gold-light);}
 
-    h1{font-size:3em;margin:0 0 20px;color:var(--gold);}
-    .logo-R{width:1.1em;height:1.1em;vertical-align:-0.15em;}
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: var(--brand-black);
+      color: var(--text-body);
+      margin: 0;
+      text-align: center;
+      padding: 40px 20px;
+    }
 
-    p{font-size:1.2em;margin-bottom:28px;max-width:760px;margin-inline:auto;
-      color:#cbd5e1;}
+    /* ---- nav ---- */
+    nav {
+      margin-bottom: 50px;
+    }
+    nav a {
+      color: var(--brand-gold);
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    nav a:hover {
+      opacity: 0.7;
+    }
 
-    .btn{display:inline-block;background:var(--gold);color:#000;
-         padding:15px 32px;border-radius:8px;font-size:1.05em;font-weight:600;
-         text-decoration:none;}
-    .btn:hover{background:var(--gold-light);}
+    /* ---- headings & copy ---- */
+    h1 {
+      font-size: 3.2rem;
+      color: var(--brand-gold);
+      margin-bottom: 0.4em;
+    }
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      max-width: 720px;
+      margin: 0 auto 1.4em;
+    }
 
-    footer{margin-top:60px;font-size:.95em;color:#8b949e;}
+    /* ---- footer ---- */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      margin-top: 60px;
+      padding-top: 25px;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
   </style>
 </head>
+
 <body>
+  <!-- simple nav -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+  </nav>
 
-  <header>
-    <a href="index.html"><img src="deco-logo.png" alt="RecoGenie logo" class="logo" /></a>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-    </nav>
-  </header>
+  <main>
+    <h1>About Reco&nbsp;Genie<sup>®</sup></h1>
 
-  <h1><img src="deco-logo.png" alt="" class="logo-R">ecoGenie</h1>
+    <p>
+      Reco&nbsp;Genie is on a mission to make smart, contextual recommendations effortless for businesses of every size.
+      We combine cutting-edge AI with intuitive design so your customers always get the right suggestion at the right moment.
+    </p>
 
-  <p>RecoGenie is at the forefront of AI innovation, developing intelligent agents that transform how businesses operate. Our mission is to make advanced AI technology accessible and practical for businesses of all sizes.</p>
-  <p>Our main target is SME's.</p>
-  <p>We combine cutting-edge artificial intelligence with intuitive design to create solutions that drive real business value.</p>
+    <!-- ✨ new infrastructure copy -->
+    <p>Our service is securely hosted using Amazon&nbsp;Web&nbsp;Services infrastructure.</p>
+    <p>Reco&nbsp;Genie uses OpenAI’s GPT-4o model to process natural language and generate intelligent responses.</p>
+    <p>All voice calls on Reco&nbsp;Genie are powered by Twilio’s Programmable Voice&nbsp;API.</p>
+  </main>
 
-  <a href="mailto:hello@recogenie.com" class="btn">Contact Us</a>
-
-  
-  <--
   <footer>
-    RecoGenie Ltd&nbsp;|&nbsp;483 Green Lanes, London N13 4BS, United Kingdom<br>
-    RecoGenie™ is a registered trademark in the United Kingdom.
+    Reco&nbsp;Genie&nbsp;Ltd · 483&nbsp;Green&nbsp;Lanes, London&nbsp;N13&nbsp;4BS · Registered in the&nbsp;UK.<br />
+    &copy; 2025 Reco Genie<sup>®</sup>. All rights reserved.
   </footer>
- 
 </body>
 </html>
