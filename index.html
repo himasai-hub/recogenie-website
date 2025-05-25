@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>RecoGenie – AI Agents Launch</title>
+  <title>About – RecoGenie</title>
 
-  <!-- favicon -->
   <link rel="icon" href="deco-logo.png" type="image/png" />
 
   <style>
@@ -14,8 +13,6 @@
       --brand-blue:#2563eb;
       --brand-blue-dark:#1e40af;
     }
-    *{box-sizing:border-box;}
-
     body{
       font-family:"Segoe UI",sans-serif;
       background:#f4f9fc;
@@ -24,7 +21,6 @@
       padding:40px;
     }
 
-    /* NAV + LOGO */
     header{
       display:flex;
       justify-content:center;
@@ -38,24 +34,20 @@
       text-decoration:none;
       margin:0 12px;
       font-size:1.1em;
-      font-weight:500;
     }
     nav a:hover{color:var(--brand-blue-dark);}
 
     h1{color:#1e3a8a;font-size:3em;margin-top:0;}
-    p {color:#333;font-size:1.2em;margin-bottom:30px;}
-
-    img.hero, video{
-      max-width:100%;
-      height:auto;
-      border-radius:12px;
-      box-shadow:0 0 20px rgba(0,0,0,.1);
+    p{
+      color:#333;
+      font-size:1.2em;
+      margin-bottom:30px;
+      max-width:760px;
+      margin-inline:auto;
     }
-    video{margin:30px 0;}
 
     .btn{
       display:inline-block;
-      margin-top:30px;
       background:var(--brand-blue);
       color:#fff;
       padding:15px 30px;
@@ -64,6 +56,8 @@
       text-decoration:none;
     }
     .btn:hover{background:var(--brand-blue-dark);}
+
+    footer{margin-top:60px;font-size:.95em;color:#555;}
   </style>
 </head>
 <body>
@@ -78,18 +72,19 @@
     </nav>
   </header>
 
-  <h1>We're Launching AI Agents!</h1>
-  <p>RecoGenie is bringing intelligent automation to help your business grow. Stay tuned.</p>
-  <p>Our main target is SME's</p>
+  <h1>About RecoGenie</h1>
 
-  <!-- hero banner (use whichever filename you actually pushed) -->
-  <img src="launch-ai-agents.png" alt="Launching AI Agents" class="hero" />
+  <p>RecoGenie is at the forefront of AI innovation, developing intelligent agents that transform how businesses operate. Our mission is to make advanced AI technology accessible and practical for businesses of all sizes.</p>
+  <p>Our main target is SME's.</p>
+  <p>We combine cutting-edge artificial intelligence with intuitive design to create solutions that drive real business value.</p>
 
-  <video controls>
-    <source src="company_video.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+  <a href="mailto:hello@recogenie.com" class="btn">Contact Us</a>
 
-  <a href="mailto:hello@recogenie.com" class="btn">Get in Touch</a>
+  <!-- optional address footer -->
+  <!--
+  <footer>
+    RecoGenie Ltd | 123 Innovation Street, Glasgow G11 4AA, United Kingdom
+  </footer>
+  -->
 </body>
 </html>
