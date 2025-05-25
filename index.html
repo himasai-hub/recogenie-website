@@ -5,20 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RecoGenie – AI Agents Launch</title>
 
-  <!-- ── Favicons ────────────────────────────────────────── -->
-  <link rel="icon"       type="image/png" sizes="32x32" href="favicon-32.png" />
-  <link rel="icon"       type="image/png" sizes="16x16" href="favicon-16.png" />
-  <link rel="apple-touch-icon"            sizes="180x180" href="apple-touch-icon.png" />
-  <!-- fallback if someone drags the URL (many browsers still honour .ico) -->
+  <!-- — favicons (all files live in repo root) — -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
   <link rel="shortcut icon" href="deco-logo.png" />
 
-  <!-- ── Social / link-preview (Open Graph + Twitter Card) ─────────────── -->
+  <!-- — social preview — -->
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content="https://recogenie.com/" />
   <meta property="og:title"       content="RecoGenie – AI Agents for SMEs" />
   <meta property="og:description" content="Intelligent automation to help your business grow." />
   <meta property="og:image"       content="https://recogenie.com/deco-logo.png" />
-
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content="RecoGenie – AI Agents for SMEs" />
   <meta name="twitter:description" content="Intelligent automation to help your business grow." />
@@ -26,86 +24,77 @@
 
   <style>
     :root{
-      --brand-gold:#c7a550;
-      --brand-gold-light:#e2c77a;
-      --brand-bg:#0d1117;
+      --gold:#c7a550;
+      --gold-light:#e2c77a;
+      --bg:#0d1117;
     }
     *{box-sizing:border-box;}
 
     body{
       font-family:"Segoe UI",sans-serif;
       margin:0;
-      background:var(--brand-bg);
+      background:var(--bg);
       color:#d1d5db;
       text-align:center;
       padding:40px;
     }
-    /* ── Header / Navbar ───────────────── */
+
+    /* header / nav */
     header{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap:28px;
-      margin-bottom:40px;
+      display:flex;justify-content:center;align-items:center;
+      gap:28px;margin-bottom:40px;
     }
     header img.logo{width:72px;height:auto;}
-
     nav a{
-      color:var(--brand-gold);
-      text-decoration:none;
-      margin:0 14px;
-      font-size:1.05em;
-      font-weight:600;
+      color:var(--gold);text-decoration:none;margin:0 14px;
+      font-size:1.05em;font-weight:600;
     }
-    nav a:hover{color:var(--brand-gold-light);}
+    nav a:hover{color:var(--gold-light);}
 
-    /* ── Content ───────────────────────── */
-    h1{color:var(--brand-gold);font-size:3em;margin-top:0;}
+    /* heading with logo-as-R */
+    h1{
+      font-size:3em;margin:0 0 20px 0;color:var(--gold);
+    }
+    .logo-R{
+      width:1.1em;height:1.1em;vertical-align:-0.15em;
+    }
+
     p{font-size:1.2em;margin-bottom:28px;color:#cbd5e1;}
 
     img.hero, video{
-      max-width:100%;
-      height:auto;
-      border-radius:12px;
+      max-width:100%;height:auto;border-radius:12px;
       box-shadow:0 0 25px rgba(0,0,0,.45);
     }
     video{margin:32px 0;}
 
     .btn{
-      display:inline-block;
-      margin-top:30px;
-      background:var(--brand-gold);
-      color:#000;
-      padding:15px 32px;
-      border-radius:8px;
-      font-size:1.05em;
-      font-weight:600;
-      text-decoration:none;
+      display:inline-block;margin-top:30px;background:var(--gold);
+      color:#000;padding:15px 32px;border-radius:8px;
+      font-size:1.05em;font-weight:600;text-decoration:none;
     }
-    .btn:hover{background:var(--brand-gold-light);}
+    .btn:hover{background:var(--gold-light);}
   </style>
 </head>
 <body>
 
-  <!-- ── Header + Nav ────────────────────────── -->
+  <!-- header -->
   <header>
-    <a href="index.html">
-      <img src="deco-logo.png" alt="RecoGenie logo" class="logo" />
-    </a>
+    <a href="index.html"><img src="deco-logo.png" alt="RecoGenie logo" class="logo" /></a>
     <nav>
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
     </nav>
   </header>
 
-  <!-- ── Hero ─────────────────────────────────── -->
-  <h1>We're Launching AI Agents!</h1>
+  <!-- hero -->
+  <h1><img src="deco-logo.png" alt="" class="logo-R">ecoGenie</h1>
   <p>RecoGenie is bringing intelligent automation to help your business grow. Stay tuned.</p>
   <p>Our main target is SME's.</p>
 
-  <!-- replace with your banner image if different -->
-  <img src="launch-ai-agents.png" alt="Launching AI Agents" class="hero" />
+  <!-- Morag banner -->
+  <img src="Morag.png" alt="RecoGenie hero image" class="hero" />
 
+  <!-- optional video section -->
   <video controls>
     <source src="company_video.mp4" type="video/mp4" />
     Your browser does not support the video tag.
