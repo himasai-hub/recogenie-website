@@ -3,65 +3,91 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About – RecoGenie</title>
+  <title>RecoGenie – AI Agents Launch</title>
 
-  <link rel="icon" href="deco-logo.png" type="image/png" />
+  <!-- ── Favicons ────────────────────────────────────────── -->
+  <link rel="icon"       type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="icon"       type="image/png" sizes="16x16" href="favicon-16.png" />
+  <link rel="apple-touch-icon"            sizes="180x180" href="apple-touch-icon.png" />
+  <!-- fallback if someone drags the URL (many browsers still honour .ico) -->
+  <link rel="shortcut icon" href="deco-logo.png" />
+
+  <!-- ── Social / link-preview (Open Graph + Twitter Card) ─────────────── -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://recogenie.com/" />
+  <meta property="og:title"       content="RecoGenie – AI Agents for SMEs" />
+  <meta property="og:description" content="Intelligent automation to help your business grow." />
+  <meta property="og:image"       content="https://recogenie.com/deco-logo.png" />
+
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="RecoGenie – AI Agents for SMEs" />
+  <meta name="twitter:description" content="Intelligent automation to help your business grow." />
+  <meta name="twitter:image"       content="https://recogenie.com/deco-logo.png" />
 
   <style>
     :root{
       --brand-gold:#c7a550;
-      --brand-blue:#2563eb;
-      --brand-blue-dark:#1e40af;
+      --brand-gold-light:#e2c77a;
+      --brand-bg:#0d1117;
     }
+    *{box-sizing:border-box;}
+
     body{
       font-family:"Segoe UI",sans-serif;
-      background:#f4f9fc;
       margin:0;
+      background:var(--brand-bg);
+      color:#d1d5db;
       text-align:center;
       padding:40px;
     }
-
+    /* ── Header / Navbar ───────────────── */
     header{
       display:flex;
       justify-content:center;
       align-items:center;
-      gap:24px;
+      gap:28px;
       margin-bottom:40px;
     }
     header img.logo{width:72px;height:auto;}
-    nav a{
-      color:var(--brand-blue);
-      text-decoration:none;
-      margin:0 12px;
-      font-size:1.1em;
-    }
-    nav a:hover{color:var(--brand-blue-dark);}
 
-    h1{color:#1e3a8a;font-size:3em;margin-top:0;}
-    p{
-      color:#333;
-      font-size:1.2em;
-      margin-bottom:30px;
-      max-width:760px;
-      margin-inline:auto;
+    nav a{
+      color:var(--brand-gold);
+      text-decoration:none;
+      margin:0 14px;
+      font-size:1.05em;
+      font-weight:600;
     }
+    nav a:hover{color:var(--brand-gold-light);}
+
+    /* ── Content ───────────────────────── */
+    h1{color:var(--brand-gold);font-size:3em;margin-top:0;}
+    p{font-size:1.2em;margin-bottom:28px;color:#cbd5e1;}
+
+    img.hero, video{
+      max-width:100%;
+      height:auto;
+      border-radius:12px;
+      box-shadow:0 0 25px rgba(0,0,0,.45);
+    }
+    video{margin:32px 0;}
 
     .btn{
       display:inline-block;
-      background:var(--brand-blue);
-      color:#fff;
-      padding:15px 30px;
+      margin-top:30px;
+      background:var(--brand-gold);
+      color:#000;
+      padding:15px 32px;
       border-radius:8px;
-      font-size:1.1em;
+      font-size:1.05em;
+      font-weight:600;
       text-decoration:none;
     }
-    .btn:hover{background:var(--brand-blue-dark);}
-
-    footer{margin-top:60px;font-size:.95em;color:#555;}
+    .btn:hover{background:var(--brand-gold-light);}
   </style>
 </head>
 <body>
 
+  <!-- ── Header + Nav ────────────────────────── -->
   <header>
     <a href="index.html">
       <img src="deco-logo.png" alt="RecoGenie logo" class="logo" />
@@ -72,19 +98,19 @@
     </nav>
   </header>
 
-  <h1>About RecoGenie</h1>
-
-  <p>RecoGenie is at the forefront of AI innovation, developing intelligent agents that transform how businesses operate. Our mission is to make advanced AI technology accessible and practical for businesses of all sizes.</p>
+  <!-- ── Hero ─────────────────────────────────── -->
+  <h1>We're Launching AI Agents!</h1>
+  <p>RecoGenie is bringing intelligent automation to help your business grow. Stay tuned.</p>
   <p>Our main target is SME's.</p>
-  <p>We combine cutting-edge artificial intelligence with intuitive design to create solutions that drive real business value.</p>
 
-  <a href="mailto:hello@recogenie.com" class="btn">Contact Us</a>
+  <!-- replace with your banner image if different -->
+  <img src="launch-ai-agents.png" alt="Launching AI Agents" class="hero" />
 
-  <!-- optional address footer -->
-  <!--
-  <footer>
-    RecoGenie Ltd | 123 Innovation Street, Glasgow G11 4AA, United Kingdom
-  </footer>
-  -->
+  <video controls>
+    <source src="company_video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <a href="mailto:hello@recogenie.com" class="btn">Get in Touch</a>
 </body>
 </html>
