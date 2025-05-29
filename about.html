@@ -3,88 +3,143 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About – Reco Genie®</title>
-
+  <title>About Us – Reco Genie</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ---- core palette ---- */
     :root {
-      --brand-black: #000;
-      --brand-gold: #d4af37;
-      --text-body: #f4f4f4;
+      --bg: #131313;
+      --panel: #1e1e1e;
+      --gold: #d4af37;
+      --text: #f8f8f8;
+      --muted: #a8a8a8;
+      --radius: 14px;
     }
-
-    body {
-      font-family: "Segoe UI", sans-serif;
-      background: var(--brand-black);
-      color: var(--text-body);
+    * {
+      box-sizing: border-box;
       margin: 0;
-      text-align: center;
-      padding: 40px 20px;
+      padding: 0;
     }
-
-    /* ---- nav ---- */
-    nav {
-      margin-bottom: 50px;
+    body {
+      font-family: Inter, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
     }
-    nav a {
-      color: var(--brand-gold);
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 28px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .brand {
+      font-weight: 700;
+      font-size: 1.15rem;
+    }
+    nav a.btn {
+      margin-left: 14px;
+      padding: 9px 22px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: .92rem;
       text-decoration: none;
-      margin: 0 18px;
-      font-weight: 500;
-      transition: opacity 0.2s;
+      transition: all .25s;
     }
-    nav a:hover {
-      opacity: 0.7;
+    nav a.btn.primary {
+      background: var(--gold);
+      color: #000;
     }
-
-    /* ---- headings & copy ---- */
+    nav a.btn.primary:hover {
+      background: #f4ce5f;
+    }
+    section {
+      padding: 70px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
     h1 {
-      font-size: 3.2rem;
-      color: var(--brand-gold);
-      margin-bottom: 0.4em;
+      font-size: 2.6rem;
+      font-weight: 700;
+      margin-bottom: 16px;
     }
-    p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      max-width: 720px;
-      margin: 0 auto 1.4em;
+    h2 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      margin: 60px 0 18px;
     }
-
-    /* ---- footer ---- */
+    p.lead {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 760px;
+      margin-bottom: 34px;
+    }
+    .values {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 22px;
+    }
+    .value-card {
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+    }
+    .value-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+    .value-card p {
+      font-size: .93rem;
+      color: var(--muted);
+    }
     footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      margin-top: 60px;
-      padding-top: 25px;
-      font-size: 0.95rem;
-      color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      padding: 40px 20px 60px;
+      color: var(--muted);
+      font-size: .9rem;
+      border-top: 1px solid rgba(255,255,255,.05);
+      margin-top: 80px;
     }
   </style>
 </head>
-
 <body>
-  <!-- simple nav -->
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-  </nav>
+  <header>
+    <div class="brand">Recogenie</div>
+    <nav>
+      <a href="index.html" class="btn primary">Back&nbsp;to&nbsp;Home</a>
+    </nav>
+  </header>
 
-  <main>
-    <h1>About Reco&nbsp;Genie<sup>®</sup></h1>
+  <section>
+    <h1>About&nbsp;Us</h1>
+    <p class="lead">Reco&nbsp;Genie exists to reinvent the way companies talk to their customers. We combine state-of-the-art voice AI with deep domain expertise to create effortless, human-sounding conversations at scale.</p>
 
-    <p>
-      Reco&nbsp;Genie is on a mission to make smart, contextual recommendations effortless for businesses of every size.
-      We combine cutting-edge AI with intuitive design so your customers always get the right suggestion at the right moment.
-    </p>
+    <h2>Our&nbsp;Mission</h2>
+    <p>To empower every organisation—big or small—to offer world-class phone support without the usual cost or complexity.</p>
 
-    <!-- ✨ new infrastructure copy -->
-    <p>Our service is securely hosted using Amazon&nbsp;Web&nbsp;Services infrastructure.</p>
-    <p>Reco&nbsp;Genie uses OpenAI’s GPT-4o model to process natural language and generate intelligent responses.</p>
-    <p>All voice calls on Reco&nbsp;Genie are powered by Twilio’s Programmable Voice&nbsp;API.</p>
-  </main>
+    <h2>Our&nbsp;Values</h2>
+    <div class="values">
+      <div class="value-card">
+        <h3>Integrity</h3>
+        <p>We put transparency and privacy first in all decisions.</p>
+      </div>
+      <div class="value-card">
+        <h3>Customer-first</h3>
+        <p>Product direction starts with listening to real business pain points.</p>
+      </div>
+      <div class="value-card">
+        <h3>Innovation</h3>
+        <p>We never stop exploring better ways to solve age-old problems.</p>
+      </div>
+      <div class="value-card">
+        <h3>Efficiency</h3>
+        <p>We obsess over latency, cost, and resource use so you don’t have to.</p>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    Reco&nbsp;Genie&nbsp;Ltd · 483&nbsp;Green&nbsp;Lanes, London&nbsp;N13&nbsp;4BS · Registered in the&nbsp;UK.<br />
-    &copy; 2025 Reco Genie<sup>®</sup>. All rights reserved.
+    &copy; 2025 Reco Genie&nbsp;Ltd. All rights reserved.
   </footer>
 </body>
 </html>
