@@ -3,126 +3,223 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>RecoGenie – AI Agents Launch</title>
+  <title>Reco Genie – AI Voice Agents for Business</title>
 
-  <!-- ── Favicons (must live in the site root) ──────────────────────────── -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="shortcut icon" href="/deco-logo.png"> <!-- fallback -->
-
-  <!-- (optional) minimal social-share preview -->
-  <meta property="og:title" content="RecoGenie – AI Agents for SMEs">
-  <meta property="og:description" content="Intelligent automation to help your business grow.">
-  <meta property="og:image" content="https://recogenie.com/deco-logo.png">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://recogenie.com/">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://recogenie.com/deco-logo.png">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --gold:#c7a550;
-      --gold-light:#e2c77a;
-      --bg:#0d1117;
+    :root {
+      --bg: #131313;
+      --panel: #1e1e1e;
+      --gold: #d4af37;
+      --gold-light: #f4ce5f;
+      --text: #f8f8f8;
+      --muted: #a8a8a8;
+      --radius: 14px;
     }
-    *{box-sizing:border-box;}
-
-    body{
-      font-family:"Segoe UI",sans-serif;
-      margin:0;
-      background:var(--bg);
-      color:#d1d5db;
-      text-align:center;
-      padding:40px;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
     }
-
-    /* ── Brand mark (centered lamp) ── */
-    .brand-logo{
-      width:96px;          /* overall size */
-      height:auto;
-      display:block;
-      margin:0 auto 24px;
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 28px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
     }
-
-    /* ── Navigation ── */
-    nav{margin-bottom:40px;}
-    nav a{
-      color:var(--gold);
-      text-decoration:none;
-      margin:0 18px;
-      font-size:1.05em;
-      font-weight:600;
+    .brand {
+      font-weight: 700;
+      font-size: 1.15rem;
     }
-    nav a:hover{color:var(--gold-light);}
-
-    /* ── Headings & copy ── */
-    h1{
-      color:var(--gold);
-      font-size:2.8em;
-      margin:0 0 24px;
+    nav a.btn {
+      margin-left: 14px;
+      padding: 9px 22px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: .92rem;
+      text-decoration: none;
+      transition: all .25s;
     }
-    p{
-      font-size:1.2em;
-      margin-bottom:28px;
-      color:#cbd5e1;
+    nav a.btn.primary {
+      background: var(--gold);
+      color: #000;
     }
-
-    /* ── Media blocks ── */
-    img.hero{
-      max-width:80%;       /* shrink Morag banner */
-      height:auto;
-      border-radius:12px;
-      box-shadow:0 0 25px rgba(0,0,0,.45);
+    nav a.btn.primary:hover { background: var(--gold-light); }
+    nav a.btn.outline {
+      border: 1px solid var(--gold);
+      color: var(--gold);
     }
-    video{
-      max-width:100%;
-      height:auto;
-      margin:32px 0;
-      border-radius:12px;
-      box-shadow:0 0 25px rgba(0,0,0,.45);
+    nav a.btn.outline:hover {
+      background: rgba(212,175,55,.1);
     }
-
-    /* ── CTA button ── */
-    .btn{
-      display:inline-block;
-      margin-top:30px;
-      background:var(--gold);
-      color:#000;
-      padding:15px 32px;
-      border-radius:8px;
-      font-size:1.05em;
-      font-weight:600;
-      text-decoration:none;
+    section {
+      padding: 70px 20px;
+      max-width: 1140px;
+      margin: 0 auto;
     }
-    .btn:hover{background:var(--gold-light);}
+    h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    p.lead {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 720px;
+      margin-bottom: 36px;
+    }
+    .hero {
+      background: url('launch-ai-agents.png') center/cover no-repeat;
+      border-radius: var(--radius);
+      padding: 100px 60px;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      max-width: 580px;
+      background: linear-gradient(135deg,var(--gold) 0%,var(--gold-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 24px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 540px;
+      color: #f1f1f1;
+      margin-bottom: 36px;
+    }
+    .hero a.btn {
+      padding: 15px 34px;
+      font-size: 1rem;
+    }
+    .benefits {
+      display: grid;
+      gap: 26px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    .benefit {
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      transition: transform .25s ease;
+    }
+    .benefit:hover { transform: translateY(-6px); }
+    .benefit h3 {
+      font-size: 1.25rem;
+      margin: 18px 0 10px;
+    }
+    .benefit p {
+      color: var(--muted);
+      font-size: .95rem;
+    }
+    .feature-grid {
+      display: grid;
+      gap: 26px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      margin-top: 36px;
+    }
+    .feature-tile {
+      background: var(--panel);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.02);
+    }
+    .feature-tile img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .feature-tile div {
+      padding: 24px;
+    }
+    .feature-tile h4 {
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+    .feature-tile p {
+      font-size: .94rem;
+      color: var(--muted);
+    }
+    footer {
+      text-align: center;
+      padding: 40px 20px 60px;
+      color: var(--muted);
+      font-size: .9rem;
+      border-top: 1px solid rgba(255,255,255,.05);
+      margin-top: 80px;
+    }
+    @media(max-width:620px) {
+      .hero { padding: 60px 24px; }
+      .hero h1 { font-size: 2.1rem; }
+    }
   </style>
 </head>
 <body>
+  <header>
+    <div class="brand">Recogenie</div>
+    <nav>
+      <a href="mailto:hello@recogenie.com" class="btn primary">Get&nbsp;Started</a>
+      <a href="mailto:hello@recogenie.com" class="btn outline">Contact&nbsp;Sales</a>
+    </nav>
+  </header>
 
-  <!-- Lamp logo at the very top -->
-  <img src="deco-logo.png" alt="RecoGenie logo" class="brand-logo" />
+  <section class="hero">
+    <h1>AI voice agents that handle calls so your team doesn’t have&nbsp;to.</h1>
+    <p>Reco&nbsp;Genie builds next-generation voice AI that picks up the phone, answers questions, and takes orders 24/7 while sounding just like your brand.</p>
+    <a href="mailto:hello@recogenie.com" class="btn primary">Get&nbsp;Started</a>
+  </section>
 
-  <!-- Navigation bar -->
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-  </nav>
+  <section>
+    <h2>How we boost your business</h2>
+    <p class="lead">Our bots work around the clock, trimming costs and lifting customer happiness in one smart move.</p>
+    <div class="benefits">
+      <div class="benefit">
+        <h3>Automate support</h3>
+        <p>Let AI answer routine questions and free human staff for the tricky stuff.</p>
+      </div>
+      <div class="benefit">
+        <h3>Delight customers</h3>
+        <p>Lightning-fast responses mean shorter wait times and higher satisfaction.</p>
+      </div>
+      <div class="benefit">
+        <h3>Cut overhead</h3>
+        <p>Scale call capacity without hiring a small army of agents.</p>
+      </div>
+    </div>
+  </section>
 
-  <!-- Hero copy -->
-  <h1>RecoGenie</h1>
-  <p>RecoGenie is bringing intelligent automation to help your business grow. Stay tuned.</p>
-  <p>Our main target is SME's.</p>
+  <section>
+    <h2>Key Features</h2>
+    <p class="lead">Powered by cutting-edge language models and trained on your data for seamless performance.</p>
+    <div class="feature-grid">
+      <div class="feature-tile">
+        <img src="nlu.png" alt="Natural Language Processing">
+        <div>
+          <h4>Natural Language Processing</h4>
+          <p>Our agents understand caller intent and respond naturally, not like a bot.</p>
+        </div>
+      </div>
+      <div class="feature-tile">
+        <img src="ml.png" alt="Machine Learning">
+        <div>
+          <h4>Machine Learning</h4>
+          <p>Every interaction makes the system smarter and more effective over time.</p>
+        </div>
+      </div>
+      <div class="feature-tile">
+        <img src="integration.png" alt="System Integration">
+        <div>
+          <h4>System Integration</h4>
+          <p>Seamlessly connect to your CRM, POS, and other platforms through APIs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Morag banner (80 % width) -->
-  <img src="Morag.png" alt="Morag – AI assistant" class="hero" />
-
-  <!-- Optional video showcase -->
-  <video controls>
-    <source src="company_video.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-
-  <a href="mailto:hello@recogenie.com" class="btn">Get in Touch</a>
+  <footer>
+    © 2025 Reco Genie&nbsp;Ltd. All rights reserved.
+  </footer>
 </body>
 </html>
