@@ -23,7 +23,7 @@
       font-family: Inter, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.55;
+      line-height: 1.6;
     }
     header {
       display: flex;
@@ -92,9 +92,19 @@
       font-size: .93rem;
       color: var(--muted);
     }
+
+    .infra-block {
+      margin-top: 60px;
+      background: var(--panel);
+      padding: 32px;
+      border-radius: var(--radius);
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
     footer {
       text-align: center;
-      padding: 40px 20px 60px;
+      padding: 50px 20px 70px;
       color: var(--muted);
       font-size: .9rem;
       border-top: 1px solid rgba(255,255,255,.05);
@@ -106,7 +116,7 @@
   <header>
     <div class="brand">Recogenie</div>
     <nav>
-      <a href="index.html" class="btn primary">Back&nbsp;to&nbsp;Home</a>
+      <a href="index.html" class="btn primary">Home</a>
     </nav>
   </header>
 
@@ -136,10 +146,17 @@
         <p>We obsess over latency, cost, and resource use so you don’t have to.</p>
       </div>
     </div>
+
+    <div class="infra-block">
+      <p>Our service is securely hosted using Amazon Web Services infrastructure.</p>
+      <p>Reco Genie uses OpenAI’s GPT-4o model to process natural language and generate intelligent responses.</p>
+      <p>All voice calls on Reco Genie are powered by Twilio’s Programmable Voice API.</p>
+    </div>
   </section>
 
   <footer>
-    &copy; 2025 Reco Genie&nbsp;Ltd. All rights reserved.
+    483 Green Lanes, London N13 4BS · Registered in the UK.<br>
+    &copy; 2025 Reco Genie<sup>®</sup>. All rights reserved.
   </footer>
 </body>
 </html>
