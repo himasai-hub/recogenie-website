@@ -22,99 +22,160 @@
       color: var(--text);
       line-height: 1.55;
     }
+
     header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       padding: 18px 28px;
       border-bottom: 1px solid rgba(255,255,255,.06);
+      position: relative;
     }
+
     .brand {
       font-weight: 700;
-      font-size: 1.15rem;
+      font-size: 1.2rem;
     }
-    nav a.btn {
-      margin-left: 14px;
-      padding: 9px 22px;
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    .nav-links a {
+      padding: 10px 24px;
       border-radius: 999px;
       font-weight: 600;
-      font-size: .92rem;
+      font-size: 0.95rem;
       text-decoration: none;
-      transition: all .25s;
+      transition: background 0.25s;
     }
-    nav a.btn.primary {
+
+    .btn.primary {
       background: var(--gold);
       color: #000;
     }
-    nav a.btn.primary:hover {
+
+    .btn.primary:hover {
       background: var(--gold-light);
     }
-    nav a.btn.outline {
+
+    .btn.outline {
       border: 1px solid var(--gold);
       color: var(--gold);
     }
-    nav a.btn.outline:hover {
+
+    .btn.outline:hover {
       background: rgba(212,175,55,.1);
     }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 24px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background: var(--panel);
+        border-radius: 8px;
+        padding: 16px;
+        box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
     section {
       padding: 70px 20px;
       max-width: 1140px;
       margin: 0 auto;
     }
+
     h2 {
       font-size: 2.25rem;
       font-weight: 700;
       margin-bottom: 20px;
     }
+
     p.lead {
       font-size: 1.15rem;
       color: var(--muted);
       max-width: 720px;
       margin-bottom: 36px;
     }
+
     .hero {
       background: url('launch-ai-agents.png') center/cover no-repeat;
       border-radius: var(--radius);
       padding: 100px 60px;
     }
+
     .hero h1 {
       font-size: 2.8rem;
       max-width: 580px;
-      background: linear-gradient(135deg,var(--gold) 0%,var(--gold-light) 100%);
+      background: linear-gradient(135deg,var(--gold),var(--gold-light));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 24px;
     }
+
     .hero p {
       font-size: 1.2rem;
       max-width: 540px;
       color: #f1f1f1;
       margin-bottom: 36px;
     }
+
     .hero a.btn {
       padding: 15px 34px;
       font-size: 1rem;
     }
+
     .benefits {
       display: grid;
       gap: 26px;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     }
+
     .benefit {
       background: var(--panel);
       border-radius: var(--radius);
       padding: 32px 28px;
       transition: transform .25s ease;
     }
+
     .benefit:hover { transform: translateY(-6px); }
+
     .benefit h3 {
       font-size: 1.25rem;
       margin: 18px 0 10px;
     }
+
     .benefit p {
       color: var(--muted);
       font-size: .95rem;
     }
+
     footer {
       text-align: center;
       padding: 40px 20px 60px;
@@ -127,13 +188,20 @@
 </head>
 <body>
   <header>
-    <div class="brand">Recogenie</div>
-    <nav>
+    <div class="brand"><a href="index.html" style="text-decoration:none;color:var(--text)">Recogenie</a></div>
+    
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <div class="nav-links" id="navLinks">
       <a href="index.html" class="btn outline">Home</a>
       <a href="about.html" class="btn outline">About</a>
       <a href="mailto:hello@recogenie.com" class="btn primary">Get Started</a>
       <a href="mailto:hello@recogenie.com" class="btn outline">Contact Sales</a>
-    </nav>
+    </div>
   </header>
 
   <section class="hero">
@@ -186,5 +254,12 @@
   <footer>
     &copy; 2025 Reco Genie Ltd. All rights reserved.
   </footer>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('navLinks');
+      nav.classList.toggle('show');
+    }
+  </script>
 </body>
 </html>
