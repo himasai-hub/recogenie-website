@@ -4,209 +4,128 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home - RecoGenie</title>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JW3Y07BQDS"></script>
-  <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-JW3Y07BQDS');
-  </script>
-  <script>
-    // Track page load time
-    window.addEventListener('load', function() {
-        setTimeout(function() {
-            var pageLoadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
-            gtag('event', 'page_load_time', {
-                'event_category': 'Performance',
-                'event_label': 'Home Page',
-                'value': pageLoadTime
-            });
-        }, 0);
-    });
-
-    // Track user engagement (time on page)
-    var startTime = Date.now();
-    var engagementInterval = 15000; // 15 seconds
-    var engagementTimer = setInterval(function() {
-        gtag('event', 'user_engagement', {
-            'event_category': 'Engagement',
-            'event_label': 'Home Page',
-            'value': Math.floor((Date.now() - startTime) / 1000)
-        });
-    }, engagementInterval);
-
-    // Clean up timer when user leaves the page
-    window.addEventListener('beforeunload', function() {
-        clearInterval(engagementTimer);
-        gtag('event', 'total_time_on_page', {
-            'event_category': 'Engagement',
-            'event_label': 'Home Page',
-            'value': Math.floor((Date.now() - startTime) / 1000)
-        });
-    });
-
-    // Track button clicks
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('button, .btn, a.button, [role="button"]').forEach(function(button) {
-            button.addEventListener('click', function() {
-                var buttonText = this.textContent.trim();
-                var buttonId = this.id || 'unnamed-button';
-                gtag('event', 'button_click', {
-                    'event_category': 'Engagement',
-                    'event_label': buttonText || buttonId,
-                    'page_location': 'Home Page'
-                });
-            });
-        });
-    });
-  </script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-dark: #1a1a1a;
-      --secondary-dark: #2d2d2d;
-      --accent-gold: #d4af37;
-      --text-light: #ffffff;
-      --text-muted: #a0a0a0;
-      --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f9d423 100%);
+      --bg: #131313;
+      --panel: #1e1e1e;
+      --gold: #d4af37;
+      --gold-light: #f4ce5f;
+      --text: #f8f8f8;
+      --muted: #a8a8a8;
+      --radius: 14px;
     }
-
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--primary-dark);
-      color: var(--text-light);
+      font-family: Inter, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       text-align: center;
-      padding: 40px;
-      line-height: 1.6;
+      padding: 40px 20px;
     }
-
-    nav {
-      margin-bottom: 60px;
-      padding: 20px 0;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 28px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
-
-    nav a {
-      color: var(--text-light);
-      text-decoration: none;
-      margin: 0 25px;
-      font-size: 1.1em;
-      font-weight: 500;
-      transition: color 0.3s ease;
-      position: relative;
-    }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -5px;
-      left: 0;
-      background: var(--gradient-gold);
-      transition: width 0.3s ease;
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    h1 {
-      color: var(--text-light);
-      font-size: 3.5em;
+    .brand {
       font-weight: 700;
-      margin-bottom: 30px;
-      background: var(--gradient-gold);
+      font-size: 1.2rem;
+    }
+    nav a.btn {
+      margin-left: 12px;
+      padding: 10px 24px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.25s;
+    }
+    nav a.btn.primary {
+      background: var(--gold);
+      color: #000;
+    }
+    nav a.btn.primary:hover {
+      background: var(--gold-light);
+    }
+    .card {
+      background: var(--panel);
+      border-radius: var(--radius);
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 40px 24px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    h1 {
+      font-size: 2.6rem;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
     }
-
     p {
-      color: var(--text-muted);
-      font-size: 1.2em;
+      color: var(--muted);
+      font-size: 1.1rem;
       margin-bottom: 30px;
-      max-width: 800px;
+      max-width: 680px;
       margin-left: auto;
       margin-right: auto;
     }
-
-    .content-card {
-      background: var(--secondary-dark);
-      border-radius: 16px;
-      padding: 40px;
-      margin: 40px auto;
-      max-width: 1200px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease;
+    img.hero {
+      width: 100%;
+      max-width: 700px;
+      border-radius: var(--radius);
+      margin: 30px 0;
+      box-shadow: 0 6px 18px rgba(0,0,0,.4);
     }
-
-    .content-card:hover {
-      transform: translateY(-5px);
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 16px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease;
-    }
-
-    img:hover {
-      transform: scale(1.02);
-    }
-
-    .btn {
-      margin-top: 40px;
+    a.btn {
       display: inline-block;
-      background: var(--gradient-gold);
-      color: var(--primary-dark);
-      padding: 16px 32px;
-      text-decoration: none;
+      margin-top: 30px;
+      background: var(--gold);
+      color: #000;
+      padding: 14px 30px;
       border-radius: 8px;
-      font-size: 1.1em;
+      font-size: 1rem;
       font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+      text-decoration: none;
+      transition: background 0.25s;
     }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+    a.btn:hover {
+      background: var(--gold-light);
     }
-
-    @media (max-width: 768px) {
-      body {
-        padding: 20px;
-      }
-
-      h1 {
-        font-size: 2.5em;
-      }
-
-      .content-card {
-        padding: 20px;
-      }
+    footer {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 60px;
     }
   </style>
 </head>
 <body>
-  <nav>
-    <a href="home.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="mailto:hello@recogenie.com">Contact</a>
-  </nav>
+  <header>
+    <div class="brand">RecoGenie</div>
+    <nav>
+      <a href="about.html" class="btn primary">About</a>
+      <a href="mailto:hello@recogenie.com" class="btn primary">Contact</a>
+    </nav>
+  </header>
 
-  <div class="content-card">
+  <div class="card">
     <h1>We're Launching AI Agents!</h1>
-    <p>RecoGenie is bringing intelligent automation to help your business grow. Stay tuned.</p>
-    <p>Our main target is SME's</p>
-    <img src="image1.png" alt="Launching AI Agents" />
-    <br>
-    <img src="morag.png" alt="Moral Message" />
+    <p>RecoGenie is bringing intelligent automation to help your business grow. Stay tuned. Our main target is SMEs.</p>
+    <img src="launch-ai-agents.png" alt="Launching AI Agents" class="hero" />
+    <img src="Morag.png" alt="Moral Message" class="hero" />
     <br>
     <a href="mailto:hello@recogenie.com" class="btn">Get in Touch</a>
   </div>
+
+  <footer>
+    &copy; 2025 Reco Genie Ltd. All rights reserved.
+  </footer>
 </body>
 </html>
