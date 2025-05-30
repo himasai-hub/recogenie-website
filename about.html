@@ -14,17 +14,17 @@
       --muted: #a8a8a8;
       --radius: 14px;
     }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: Inter, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
     }
+
+    /* ───────────────  HEADER  ─────────────── */
     header {
       display: flex;
       align-items: center;
@@ -38,9 +38,7 @@
       color: var(--text);
       text-decoration: none;
     }
-    .brand a:hover {
-      color: var(--gold);
-    }
+    .brand a:hover { color: var(--gold); }
     nav a.btn {
       margin-left: 14px;
       padding: 9px 22px;
@@ -50,34 +48,25 @@
       text-decoration: none;
       transition: all .25s;
     }
-    nav a.btn.primary {
-      background: var(--gold);
-      color: #000;
-    }
-    nav a.btn.primary:hover {
-      background: #f4ce5f;
-    }
+    nav a.btn.primary   { background: var(--gold); color: #000; }
+    nav a.btn.primary:hover { background: #f4ce5f; }
+
+    /* ───────────────  SECTIONS  ─────────────── */
     section {
       padding: 70px 20px;
       max-width: 1000px;
       margin: 0 auto;
     }
-    h1 {
-      font-size: 2.6rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-    h2 {
-      font-size: 1.9rem;
-      font-weight: 600;
-      margin: 60px 0 18px;
-    }
+    h1 { font-size: 2.6rem; font-weight: 700; margin-bottom: 16px; }
+    h2 { font-size: 1.9rem; font-weight: 600; margin: 60px 0 18px; }
     p.lead {
       font-size: 1.15rem;
       color: var(--muted);
       max-width: 760px;
       margin-bottom: 34px;
     }
+
+    /* ───────────────  VALUES CARDS  ─────────────── */
     .values {
       display: grid;
       gap: 24px;
@@ -89,24 +78,25 @@
       border-radius: var(--radius);
       padding: 28px 24px;
     }
-    .value-card h3 {
-      font-size: 1.15rem;
-      margin-bottom: 10px;
-    }
-    .value-card p {
-      font-size: .93rem;
-      color: var(--muted);
-    }
+    .value-card h3   { font-size: 1.15rem; margin-bottom: 10px; }
+    .value-card p    { font-size: .93rem; color: var(--muted); }
 
-    .infra-block {
+    /* ───────────────  NEW INFRA GRID  ─────────────── */
+    .infra-grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       margin-top: 60px;
-      background: var(--panel);
-      padding: 32px;
-      border-radius: var(--radius);
-      color: var(--muted);
-      font-size: 1rem;
     }
+    .infra-card {
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+    }
+    .infra-card h3   { color: var(--gold); font-size: 1.1rem; margin-bottom: 10px; }
+    .infra-card p    { font-size: .93rem; color: var(--muted); }
 
+    /* ───────────────  FOOTER  ─────────────── */
     footer {
       text-align: center;
       padding: 50px 20px 70px;
@@ -118,6 +108,7 @@
   </style>
 </head>
 <body>
+  <!-- ───────────────  HEADER  ─────────────── -->
   <header>
     <div class="brand">
       <a href="index.html">Recogenie</a>
@@ -127,12 +118,19 @@
     </nav>
   </header>
 
+  <!-- ───────────────  MAIN CONTENT  ─────────────── -->
   <section>
     <h1>About&nbsp;Us</h1>
-    <p class="lead">Reco&nbsp;Genie exists to reinvent the way companies talk to their customers. We combine state-of-the-art voice AI with deep domain expertise to create effortless, human-sounding conversations at scale.</p>
+    <p class="lead">
+      Reco&nbsp;Genie builds adaptable AI agents—voice, chat, and workflow—that help businesses of every
+      size work smarter, serve customers faster, and keep operations running smoothly.
+    </p>
 
     <h2>Our&nbsp;Mission</h2>
-    <p>To empower every organisation—big or small—to offer world-class phone support without the usual cost or complexity.</p>
+    <p>
+      To make practical AI tools available to every business—starting with small and mid-sized
+      companies—so they can serve customers better, cut busywork, and grow with confidence.
+    </p>
 
     <h2>Our&nbsp;Values</h2>
     <div class="values">
@@ -154,16 +152,27 @@
       </div>
     </div>
 
-    <div class="infra-block">
-      <p>Our service is securely hosted using Amazon Web Services infrastructure.</p>
-      <p>Reco Genie uses OpenAI’s GPT-4o model to process natural language and generate intelligent responses.</p>
-      <p>All voice calls on Reco Genie are powered by Twilio’s Programmable Voice API.</p>
+    <!-- ───────────────  NEW INFRA GRID  ─────────────── -->
+    <div class="infra-grid">
+      <div class="infra-card">
+        <h3>AWS&nbsp;Backbone</h3>
+        <p>Secure, scalable hosting on Amazon Web Services keeps your data safe and your service online 24/7.</p>
+      </div>
+      <div class="infra-card">
+        <h3>OpenAI&nbsp;GPT-4o</h3>
+        <p>Cutting-edge language models power fast, accurate understanding and responses across our products.</p>
+      </div>
+      <div class="infra-card">
+        <h3>Twilio&nbsp;Connectivity</h3>
+        <p>Twilio’s voice and messaging APIs ensure crystal-clear conversations and seamless integrations.</p>
+      </div>
     </div>
   </section>
 
+  <!-- ───────────────  FOOTER  ─────────────── -->
   <footer>
-    483 Green Lanes, London N13 4BS · Registered in the UK.<br>
-    &copy; 2025 Reco Genie<sup>®</sup>. All rights reserved.
+    483 Green Lanes, London&nbsp;N13&nbsp;4BS · Registered in the UK.<br>
+    &copy; 2025 Reco&nbsp;Genie<sup>®</sup>. All rights reserved.
   </footer>
 </body>
 </html>
