@@ -10,10 +10,7 @@
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
   <style>
-    :root {
-      --bg:#131313; --panel:#1e1e1e; --gold:#d4af37; --gold-light:#f7d975;
-      --text:#f8f8f8; --muted:#a8a8a8; --radius:14px;
-    }
+    :root { --bg:#131313; --panel:#1e1e1e; --gold:#d4af37; --gold-light:#f7d975; --text:#f8f8f8; --muted:#a8a8a8; --radius:14px }
     body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
     .btn{padding:12px 28px;border-radius:9999px;font-weight:600;font-size:.95rem;text-decoration:none;transition:background .25s}
     .btn.primary{background:var(--gold);color:#000}.btn.primary:hover{background:var(--gold-light)}
@@ -37,9 +34,8 @@
     <div class="hamburger" onclick="toggleMenu()"><div></div><div></div><div></div></div>
 
     <nav class="nav-links" id="navLinks">
-      <a href="index.html"   class="btn outline">Home</a>
-      <a href="about.html"   class="btn outline">About</a>
-      <a href="product.html" class="btn outline">Products</a>
+      <a href="index.html" class="btn outline">Home</a>
+      <a href="about.html" class="btn outline">About</a>
       <a href="product.html" class="btn primary">Get&nbsp;Started</a>
     </nav>
   </header>
@@ -104,11 +100,11 @@
     </div>
   </section>
 
-  <!-- ╔═ CTA REMINDER ════════════════════════════════ -->
+  <!-- ╔═ CTA REMINDER ═══════════════════════════════ -->
   <section class="text-center py-12">
-    <p class="text-lg max-w-3xl mx-auto">
+    <a href="product.html" class="text-lg max-w-3xl mx-auto block hover:underline">
       Ready to experience the future of customer service? <span class="text-[var(--gold)] font-semibold">Click the gold “Get&nbsp;Started” button</span> in the header to step into our AI‑agent world and sample <strong>Morag</strong>, our brand‑new voice assistant.
-    </p>
+    </a>
   </section>
 
   <!-- ╔═ FOOTER ══════════════════════════════════════ -->
