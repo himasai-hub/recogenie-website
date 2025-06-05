@@ -4,262 +4,116 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Reco Genie – AI Voice Agents for Business</title>
+
+  <!-- Google Font + Tailwind (deferred) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
   <style>
     :root {
-      --bg: #131313;
-      --panel: #1e1e1e;
-      --gold: #d4af37;
-      --gold-light: #f4ce5f;
-      --text: #f8f8f8;
-      --muted: #a8a8a8;
-      --radius: 14px;
+      --bg:#131313; --panel:#1e1e1e; --gold:#d4af37; --gold-light:#f7d975;
+      --text:#f8f8f8; --muted:#a8a8a8; --radius:14px;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: Inter, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.55;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 28px;
-      border-bottom: 1px solid rgba(255,255,255,.06);
-      position: relative;
-    }
-
-    .brand {
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 12px;
-    }
-
-    .nav-links a {
-      padding: 10px 24px;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: background 0.25s;
-    }
-
-    .btn.primary {
-      background: var(--gold);
-      color: #000;
-    }
-
-    .btn.primary:hover {
-      background: var(--gold-light);
-    }
-
-    .btn.outline {
-      border: 1px solid var(--gold);
-      color: var(--gold);
-    }
-
-    .btn.outline:hover {
-      background: rgba(212,175,55,.1);
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      cursor: pointer;
-    }
-
-    .hamburger div {
-      width: 24px;
-      height: 3px;
-      background: var(--gold);
-      border-radius: 2px;
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        right: 20px;
-        background: var(--panel);
-        border-radius: 8px;
-        padding: 16px;
-        box-shadow: 0 6px 24px rgba(0,0,0,0.4);
-      }
-
-      .nav-links.show {
-        display: flex;
-      }
-
-      .hamburger {
-        display: flex;
-      }
-    }
-
-    section {
-      padding: 70px 20px;
-      max-width: 1140px;
-      margin: 0 auto;
-    }
-
-    h2 {
-      font-size: 2.25rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    p.lead {
-      font-size: 1.15rem;
-      color: var(--muted);
-      max-width: 720px;
-      margin-bottom: 36px;
-    }
-
-    .hero {
-      background: url('launch-ai-agents.png') center/cover no-repeat;
-      border-radius: var(--radius);
-      padding: 100px 60px;
-    }
-
-    .hero h1 {
-      font-size: 2.8rem;
-      max-width: 580px;
-      background: linear-gradient(135deg,var(--gold),var(--gold-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 24px;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      max-width: 540px;
-      color: #f1f1f1;
-      margin-bottom: 36px;
-    }
-
-    .hero a.btn {
-      padding: 15px 34px;
-      font-size: 1rem;
-    }
-
-    .benefits {
-      display: grid;
-      gap: 26px;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    }
-
-    .benefit {
-      background: var(--panel);
-      border-radius: var(--radius);
-      padding: 32px 28px;
-      transition: transform .25s ease;
-    }
-
-    .benefit:hover { transform: translateY(-6px); }
-
-    .benefit h3 {
-      font-size: 1.25rem;
-      margin: 18px 0 10px;
-    }
-
-    .benefit p {
-      color: var(--muted);
-      font-size: .95rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 40px 20px 60px;
-      color: var(--muted);
-      font-size: .9rem;
-      border-top: 1px solid rgba(255,255,255,.05);
-      margin-top: 80px;
-    }
+    body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+    .btn{padding:12px 28px;border-radius:9999px;font-weight:600;font-size:.95rem;text-decoration:none;transition:background .25s}
+    .btn.primary{background:var(--gold);color:#000}.btn.primary:hover{background:var(--gold-light)}
+    .btn.outline{border:1px solid var(--gold);color:var(--gold)}.btn.outline:hover{background:rgba(212,175,55,.12)}
+    header{display:flex;justify-between;align-items:center;padding:18px 28px;border-bottom:1px solid rgba(255,255,255,.06);position:relative}
+    .nav-links{display:flex;gap:12px}
+    .hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer}
+    .hamburger div{width:22px;height:3px;background:var(--gold);border-radius:2px}
+    @media(max-width:768px){.nav-links{display:none;flex-direction:column;position:absolute;top:60px;right:20px;background:var(--panel);border-radius:8px;padding:16px;box-shadow:0 6px 24px rgba(0,0,0,.4)}
+      .nav-links.show{display:flex}.hamburger{display:flex}}
+    section{padding:80px 20px;max-width:1140px;margin:0 auto}
+    h1,h2{font-weight:700}.lead{color:var(--muted)}
   </style>
 </head>
 <body>
+
+  <!-- ╔═ HEADER ═════════════════════════════════════ -->
   <header>
-    <div class="brand"><a href="index.html" style="text-decoration:none;color:var(--text)">Recogenie</a></div>
-    
+    <div class="brand text-xl font-bold"><a href="index.html" style="text-decoration:none;color:var(--text)">Recogenie</a></div>
+
     <div class="hamburger" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
+      <div></div><div></div><div></div>
     </div>
 
-    <div class="nav-links" id="navLinks">
-      <a href="index.html" class="btn outline">Home</a>
-      <a href="about.html" class="btn outline">About</a>
-      <a href="mailto:hello@recogenie.com" class="btn primary">Get Started</a>
-      <a href="mailto:hello@recogenie.com" class="btn outline">Contact Sales</a>
-    </div>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html"   class="btn outline">Home</a>
+      <a href="product.html" class="btn outline">Product</a>
+      <a href="about.html"   class="btn outline">About</a>
+      <a href="mailto:hello@recogenie.com" class="btn primary">Get&nbsp;Started</a>
+    </nav>
   </header>
 
-  <section class="hero">
-    <h1>Smart AI tools for small- and mid-sized businesses.</h1>
-    <p>Reco Genie builds practical AI agent—like our 24/7 voice assistant—that answer calls, take orders, and handle routine tasks so your team can focus on what really matters.</p>
-    <a href="mailto:hello@recogenie.com" class="btn primary">Get&nbsp;Started</a>
+  <!-- ╔═ HERO ═══════════════════════════════════════ -->
+  <section class="hero bg-[url('launch-ai-agents.png')] bg-cover bg-center rounded-[var(--radius)] text-white px-8 py-24 sm:px-16">
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl bg-gradient-to-r from-[var(--gold)] to-[var(--gold-light)] bg-clip-text text-transparent max-w-3xl mb-6">
+      Smart AI tools for small- and mid-sized businesses.
+    </h1>
+    <p class="text-lg sm:text-xl max-w-xl mb-10">
+      Reco Genie builds practical AI agents—like our 24/7 voice assistant—that answer calls, take orders,
+      and handle routine tasks so your team can focus on what really matters.
+    </p>
+    <a href="product.html" class="btn primary text-base">Explore Morag&nbsp;&rarr;</a>
   </section>
 
+  <!-- ╔═ BENEFITS ════════════════════════════════════ -->
   <section>
-    <h2>How we boost your business</h2>
-    <p class="lead">Our AI agent work around the clock, trimming costs and lifting customer happiness in one smart move.</p>
-    <div class="benefits">
-      <div class="benefit">
-        <h3>Automate support</h3>
-        <p>Let AI answer routine questions and free human staff for the tricky stuff.</p>
+    <h2 class="text-3xl mb-6">How we boost your business</h2>
+    <p class="lead mb-10 max-w-2xl">
+      Our AI agents work around the clock, trimming costs and lifting customer happiness in one smart move.
+    </p>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="benefit bg-[var(--panel)] p-6 rounded-[var(--radius)]">
+        <h3 class="font-semibold mb-2">Automate support</h3>
+        <p class="text-sm lead">Let AI answer routine questions and free human staff for the tricky stuff.</p>
       </div>
-      <div class="benefit">
-        <h3>Delight customers</h3>
-        <p>Lightning-fast responses mean shorter wait times and higher satisfaction.</p>
+      <div class="benefit bg-[var(--panel)] p-6 rounded-[var(--radius)]">
+        <h3 class="font-semibold mb-2">Delight customers</h3>
+        <p class="text-sm lead">Lightning-fast responses mean shorter wait times and higher satisfaction.</p>
       </div>
-      <div class="benefit">
-        <h3>Cut overhead</h3>
-        <p>Scale call capacity without hiring a small army of agents.</p>
+      <div class="benefit bg-[var(--panel)] p-6 rounded-[var(--radius)]">
+        <h3 class="font-semibold mb-2">Cut overhead</h3>
+        <p class="text-sm lead">Scale call capacity without hiring a small army of agents.</p>
       </div>
     </div>
   </section>
 
+  <!-- ╔═ FEATURES ════════════════════════════════════ -->
   <section>
-    <h2>Key Features</h2>
-    <p class="lead">RecoGenie uses the latest AI technology to deliver fast, reliable, and human-like service. Our models are trained on your business data for seamless interactions.</p>
-    <div class="benefits" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 32px;">
-      <div class="benefit">
-        <img src="nlu.png" alt="Natural Language Processing" style="width:100%; border-radius: 12px; margin-bottom: 18px;">
-        <h3>Conversational Intelligence</h3>
-        <p>Reco Genie’s AI understands customer requests in plain language—handling different accents, slang, and contexts—so every interaction feels natural and easy.</p>
+    <h2 class="text-3xl mb-6">Key Features</h2>
+    <p class="lead max-w-2xl mb-10">
+      Reco Genie uses the latest AI technology to deliver fast, reliable, and human-like service.
+      Our models are trained on your business data for seamless interactions.
+    </p>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="bg-[var(--panel)] p-6 rounded-[var(--radius)]">
+        <img src="nlu.png" alt="" class="w-full rounded-lg mb-4">
+        <h3 class="font-semibold mb-2">Conversational&nbsp;Intelligence</h3>
+        <p class="text-sm lead">Understands natural language, accents, and context so every interaction feels effortless.</p>
       </div>
-      <div class="benefit">
-        <img src="ml.png" alt="Machine Learning" style="width:100%; border-radius: 12px; margin-bottom: 18px;">
-        <h3>Machine Learning</h3>
-        <p>RecoGenie adapts to every conversation by learning from each interaction to improve accuracy and reduce fallback replies.</p>
+      <div class="bg-[var(--panel)] p-6 rounded-[var(--radius)]">
+        <img src="ml.png" alt="" class="w-full rounded-lg mb-4">
+        <h3 class="font-semibold mb-2">Machine&nbsp;Learning</h3>
+        <p class="text-sm lead">Learns from each call to improve accuracy and reduce fallback replies.</p>
       </div>
-      <div class="benefit">
-        <img src="integration.png" alt="System Integration" style="width:100%; border-radius: 12px; margin-bottom: 18px;">
-        <h3>Integration with your systems</h3>
-        <p>Our agents plug into your POS, CRM, and delivery tools, making onboarding effortless and operations smoother.</p>
+      <div class="bg-[var(--panel)] p-6 rounded-[var(--radius)]">
+        <img src="integration.png" alt="" class="w-full rounded-lg mb-4">
+        <h3 class="font-semibold mb-2">Seamless&nbsp;Integrations</h3>
+        <p class="text-sm lead">Plugs into POS, CRM, and delivery tools—making onboarding effortless and ops smoother.</p>
       </div>
     </div>
   </section>
 
-  <footer>
-    &copy; 2025 Reco Genie Ltd. All rights reserved.
+  <!-- ╔═ FOOTER ══════════════════════════════════════ -->
+  <footer class="text-center py-10 border-t border-white/10 text-sm text-[var(--muted)]">
+    &copy; 2025 Reco Genie Ltd. All rights reserved.<br>
+    483&nbsp;Green&nbsp;Lanes, London N13 4BS · Registered in the UK
   </footer>
 
   <script>
-    function toggleMenu() {
-      const nav = document.getElementById('navLinks');
-      nav.classList.toggle('show');
-    }
+    function toggleMenu(){document.getElementById('navLinks').classList.toggle('show')}
   </script>
 </body>
 </html>
