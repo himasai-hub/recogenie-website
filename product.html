@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <title>Morag – Reco Genie Product</title>
 
+  <!-- Google Font + Tailwind (deferred) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
@@ -15,9 +15,9 @@
     .btn{padding:12px 28px;border-radius:9999px;font-weight:600;font-size:.95rem;text-decoration:none;transition:background .25s}
     .btn.primary{background:var(--gold);color:#000}.btn.primary:hover{background:var(--gold-light)}
     .btn.outline{border:1px solid var(--gold);color:var(--gold)}.btn.outline:hover{background:rgba(212,175,55,.12)}
-    header{display:flex;justify-between;align-items:center;padding:18px 28px;border-bottom:1px solid rgba(255,255,255,.06);position:relative}
-    .nav-links{display:flex;gap:12px}
-    .hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer}
+    header{display:flex;align-items:center;padding:18px 28px;border-bottom:1px solid rgba(255,255,255,.06);position:relative}
+    .nav-links{display:flex;gap:12px;margin-left:auto} /* push nav to far‑right */
+    .hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;margin-left:auto}
     .hamburger div{width:22px;height:3px;background:var(--gold);border-radius:2px}
     @media(max-width:768px){.nav-links{display:none;flex-direction:column;position:absolute;top:60px;right:20px;background:var(--panel);border-radius:8px;padding:16px;box-shadow:0 6px 24px rgba(0,0,0,.4)}
       .nav-links.show{display:flex}.hamburger{display:flex}}
@@ -57,14 +57,10 @@
   <section class="bg-[var(--panel)] rounded-[var(--radius)] p-10 text-center mx-4 sm:mx-auto max-w-3xl">
     <p class="uppercase tracking-widest text-[var(--gold-light)] mb-3">Call Morag now</p>
     <a href="tel:+447723307080" class="text-4xl font-extrabold mb-2 inline-block hover:text-[var(--gold-light)]">
-      +44&nbsp;1234&nbsp;567&nbsp;890
+      +44&nbsp;7723&nbsp;307&nbsp;080
     </a>
-    <p class="lead mt-4">
-      • Press&nbsp;1 to <strong>book a table</strong><br>
-      • Press&nbsp;2 to <strong>place a food order</strong><br>
-      • Press&nbsp;3 to <strong>register your name &amp; company</strong> so our team can call you back with a demo
-    </p>
-    <a href="tel:+441234567890" class="btn primary mt-8 inline-block">Dial&nbsp;Morag</a>
+    <p class="lead mt-3">Standard network rates apply – Reco Genie adds no call charges.</p>
+    <a href="tel:+447723307080" class="btn primary mt-8 inline-block">Dial&nbsp;Morag</a>
   </section>
 
   <!-- ╔═ BENEFITS GRID ══════════════════════════════ -->
@@ -80,16 +76,16 @@
         <p class="text-sm lead">Customers speak; Morag transcribes &amp; sends accurate orders straight to your POS.</p>
       </div>
       <div class="bg-[var(--panel)] p-6 rounded-[var(--radius)]">
-        <h3 class="font-semibold mb-2">Custom business sign-up</h3>
+        <h3 class="font-semibold mb-2">Custom business sign‑up</h3>
         <p class="text-sm lead">Potential partners call, leave details, and our sales team follows up with a demo.</p>
       </div>
       <div class="bg-[var(--panel)] p-6 rounded-[var(--radius)]">
-        <h3 class="font-semibold mb-2">Accent-friendly AI</h3>
+        <h3 class="font-semibold mb-2">Accent‑friendly AI</h3>
         <p class="text-sm lead">Trained on UK &amp; international speech patterns, Morag handles diverse voices with ease.</p>
       </div>
       <div class="bg-[var(--panel)] p-6 rounded-[var(--radius)]">
         <h3 class="font-semibold mb-2">No app download</h3>
-        <p class="text-sm lead">A phone number anyone can dial—perfect for walk-ins, seniors, and busy callers.</p>
+        <p class="text-sm lead">A phone number anyone can dial—perfect for walk‑ins, seniors, and busy callers.</p>
       </div>
       <div class="bg-[var(--panel)] p-6 rounded-[var(--radius)]">
         <h3 class="font-semibold mb-2">24/7 availability</h3>
