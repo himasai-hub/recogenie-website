@@ -25,4 +25,4 @@ jobs:
 
       - name: Sync files to S3
         run: |
-          aws s3 sync . s3://YOUR_BUCKET_NAME --delete --exclude ".git/*" --exclude ".github/*"
+          aws s3 sync . s3://recogenie.com --delete --exclude ".git/*" --exclude ".github/*"
