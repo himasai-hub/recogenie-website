@@ -1,131 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home - RecoGenie</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reco Genie – AI Agents for Business</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg: #131313;
-      --panel: #1e1e1e;
-      --gold: #d4af37;
-      --gold-light: #f4ce5f;
-      --text: #f8f8f8;
-      --muted: #a8a8a8;
-      --radius: 14px;
+      --white: #FFFFFF;
+      --blue: #4B5EFF;
+      --heading: #1C1C35;
+      --text: #2E2E2E;
+      --muted: rgba(0, 0, 0, 0.75);
+      --border: #e5e7eb;
     }
+
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
+
     body {
-      font-family: Inter, sans-serif;
-      background: var(--bg);
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
       color: var(--text);
-      text-align: center;
-      padding: 40px 20px;
+      line-height: 1.6;
     }
+
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 18px 28px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 20px 40px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
     }
+
     .brand {
+      font-size: 1.5rem;
       font-weight: 700;
-      font-size: 1.2rem;
+      color: var(--heading);
+      position: relative;
     }
-    nav a.btn {
-      margin-left: 12px;
-      padding: 10px 24px;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.95rem;
+
+    .brand img {
+      position: absolute;
+      top: 28px;
+      left: -40px;
+      width: 36px;
+      height: auto;
+    }
+
+    nav a {
+      margin-left: 24px;
       text-decoration: none;
-      transition: background 0.25s;
+      font-weight: 500;
+      color: var(--text);
     }
-    nav a.btn.primary {
-      background: var(--gold);
-      color: #000;
+
+    nav a.btn {
+      background: var(--blue);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
     }
-    nav a.btn.primary:hover {
-      background: var(--gold-light);
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 60px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-    .card {
-      background: var(--panel);
-      border-radius: var(--radius);
-      max-width: 900px;
-      margin: 60px auto;
-      padding: 40px 24px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+
+    .hero-text {
+      flex: 1 1 460px;
+      padding-right: 20px;
     }
-    h1 {
+
+    .hero-text h1 {
       font-size: 2.6rem;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--heading);
       margin-bottom: 20px;
     }
-    p {
-      color: var(--muted);
+
+    .hero-text p {
       font-size: 1.1rem;
+      color: var(--muted);
       margin-bottom: 30px;
-      max-width: 680px;
-      margin-left: auto;
-      margin-right: auto;
     }
-    img.hero {
-      width: 100%;
-      max-width: 700px;
-      border-radius: var(--radius);
-      margin: 30px 0;
-      box-shadow: 0 6px 18px rgba(0,0,0,.4);
-    }
-    a.btn {
-      display: inline-block;
-      margin-top: 30px;
-      background: var(--gold);
-      color: #000;
-      padding: 14px 30px;
-      border-radius: 8px;
-      font-size: 1rem;
+
+    .hero-text a {
+      background: var(--blue);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 6px;
       font-weight: 600;
       text-decoration: none;
-      transition: background 0.25s;
     }
-    a.btn:hover {
-      background: var(--gold-light);
+
+    .hero-image {
+      flex: 1 1 380px;
+      text-align: center;
     }
-    footer {
+
+    .hero-image img {
+      max-width: 100%;
+      height: auto;
+      max-height: 300px;
+    }
+
+    .features {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .features h2 {
+      font-size: 2rem;
+      color: var(--heading);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .features p {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 40px;
+      font-size: 1rem;
       color: var(--muted);
+    }
+
+    .feature-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+    }
+
+    .feature-card {
+      flex: 1 1 280px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      background: #f9f9ff;
+    }
+
+    .feature-card h3 {
+      font-size: 1.1rem;
+      color: var(--heading);
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
       font-size: 0.9rem;
+      color: #666;
+      border-top: 1px solid var(--border);
       margin-top: 60px;
     }
   </style>
 </head>
+
 <body>
+  <!-- Header -->
   <header>
-    <div class="brand">RecoGenie</div>
+    <div class="brand">
+      Reco Genie
+      <img src="genie.png" alt="Genie Logo">
+    </div>
     <nav>
-      <a href="about.html" class="btn primary">About</a>
-      <a href="mailto:hello@recogenie.com" class="btn primary">Contact</a>
+      <a href="product.html">Products</a>
+      <a href="mailto:hello@recogenie.com">Contact</a>
+      <a href="product.html" class="btn">Try Now</a>
     </nav>
   </header>
 
-  <div class="card">
-    <h1>We're Launching AI Agents!</h1>
-    <p>RecoGenie is bringing intelligent automation to help your business grow. Stay tuned. Our main target is SMEs.</p>
-    <img src="launch-ai-agents.png" alt="Launching AI Agents" class="hero" />
-    <img src="Morag.png" alt="Moral Message" class="hero" />
-    <br>
-    <a href="mailto:hello@recogenie.com" class="btn">Get in Touch</a>
-  </div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>AI agents for real-world business impact</h1>
+      <p>AI SaaS for SMEs to tackle everyday challenges and boost efficiency through automation.</p>
+      <a href="product.html">Try Now</a>
+    </div>
+    <div class="hero-image">
+      <img src="robot.png" alt="AI Robot Assistant">
+    </div>
+  </section>
 
+  <!-- Features Section -->
+  <section class="features">
+    <h2>How we boost your business</h2>
+    <p>Reco Genie develops AI agents that solve your day-to-day problems and streamline customer service.</p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>🤖 Automate support</h3>
+        <p>Let AI answer routine questions and free human staff for the tricky stuff.</p>
+      </div>
+      <div class="feature-card">
+        <h3>⚡ Delight customers</h3>
+        <p>Lightning-fast responses mean shorter wait times and higher satisfaction.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    &copy; 2025 Reco Genie Ltd. All rights reserved.
+    &copy; 2025 Reco Genie Ltd. All rights reserved.<br>
+    483 Green Lanes, London N13 4BS – Registered in the UK
   </footer>
 </body>
 </html>
