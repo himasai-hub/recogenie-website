@@ -1,1 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reco Genie – AI Voice Agents</title>
 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white: #FFFFFF;
+      --blue: #4B5EFF;
+      --heading: #1C1C35;
+      --text: #2E2E2E;
+      --muted-black: rgba(0, 0, 0, 0.8);
+      --lavender-bg: #EAEAFE;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background-color: var(--white);
+      color: var(--text);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 40px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--heading);
+      text-decoration: none;
+    }
+
+    nav a {
+      margin-left: 24px;
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .btn {
+      background-color: var(--blue);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 24px;
+    }
+
+    .hero {
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      color: var(--heading);
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--muted-black);
+      max-width: 700px;
+      margin: 0 auto 30px;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      padding: 60px 40px;
+    }
+
+    .card {
+      background: #F9FAFB;
+      border: 1px solid #e5e7eb;
+      padding: 24px;
+      border-radius: 12px;
+      width: 300px;
+    }
+
+    .card h3 {
+      color: var(--heading);
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .illustration {
+      background-color: var(--lavender-bg);
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .illustration h2 {
+      color: var(--heading);
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .illustration p {
+      color: var(--muted-black);
+      font-size: 1.05rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .illustration img {
+      margin-top: 40px;
+      max-width: 460px;
+      width: 90%;
+    }
+
+    .genie {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .genie img {
+      max-width: 160px;
+      margin-bottom: 16px;
+    }
+
+    .genie h3 {
+      font-size: 1.5rem;
+      color: var(--heading);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.9rem;
+      color: #555;
+      border-top: 1px solid #e5e7eb;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <a href="index.html" class="logo">Reco Genie</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#features">Features</a>
+      <a href="#ai">AI</a>
+      <a href="contact.html">Contact</a>
+      <a href="product.html" class="btn">Try Now</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>AI agents for your business</h1>
+    <p>
+      Empower your small or medium business with smart voice AI agents that automate orders, bookings, and support.
+    </p>
+    <a href="product.html" class="btn">Try Now</a>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <div class="card">
+      <h3>Smart Order Handling</h3>
+      <p>Let customers place voice orders 24/7. Our AI handles it smoothly, saving you time and staff cost.</p>
+    </div>
+    <div class="card">
+      <h3>Automated Booking</h3>
+      <p>Customers can book tables over the phone with zero wait time. No app required.</p>
+    </div>
+  </section>
+
+  <!-- AI Illustration Section -->
+  <section id="ai" class="illustration">
+    <h2>Built with Cutting-Edge AI</h2>
+    <p>
+      Powered by OpenAI's latest models, Reco Genie's assistants adapt to your business needs — handling accents, learning from calls, and delivering fast answers.
+    </p>
+    <img src="robot.png" alt="AI Assistant Illustration">
+  </section>
+
+  <!-- Genie Character Section -->
+  <section class="genie">
+    <img src="genie.png" alt="Reco Genie Character">
+    <h3>Say hello to your new AI sidekick</h3>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Reco Genie Ltd. All rights reserved.<br>
+    483 Green Lanes, London N13 4BS · Registered in the UK
+  </footer>
+
+</body>
+</html>
