@@ -1,211 +1,420 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Reco Genie – AI Agents for Business</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reco Genie - AI Agents for Your Business</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <style>
-    :root {
-      --white: #FFFFFF;
-      --blue: #4B5EFF;
-      --heading: #1C1C35;
-      --text: #2E2E2E;
-      --muted: rgba(0, 0, 0, 0.75);
-      --border: #e5e7eb;
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--white);
-      color: var(--text);
-      line-height: 1.6;
-    }
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
 
-    .brand {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--heading);
-      position: relative;
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #4c51bf;
+        }
 
-    .brand img {
-      position: absolute;
-      top: 28px;
-      left: -40px;
-      width: 56px;
-      height: auto;
-    }
+        .logo::before {
+            content: "⚡";
+            margin-right: 0.5rem;
+            font-size: 2rem;
+        }
 
-    nav a {
-      margin-left: 24px;
-      text-decoration: none;
-      font-weight: 500;
-      color: var(--text);
-    }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
 
-    nav a.btn {
-      background: var(--blue);
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-weight: 600;
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
 
-    .hero {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      padding: 60px 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+        .nav-links a:hover {
+            color: #4c51bf;
+        }
 
-    .hero-text {
-      flex: 1 1 460px;
-      padding-right: 20px;
-    }
+        .cta-button {
+            background: linear-gradient(45deg, #4c51bf, #667eea);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
 
-    .hero-text h1 {
-      font-size: 2.6rem;
-      color: var(--heading);
-      margin-bottom: 20px;
-    }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(76, 81, 191, 0.3);
+        }
 
-    .hero-text p {
-      font-size: 1.1rem;
-      color: var(--muted);
-      margin-bottom: 30px;
-    }
+        /* Main Content */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 4rem 0;
+            min-height: 80vh;
+        }
 
-    .hero-text a {
-      background: var(--blue);
-      color: white;
-      padding: 12px 24px;
-      border-radius: 6px;
-      font-weight: 600;
-      text-decoration: none;
-    }
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
-    .hero-image {
-      flex: 1 1 380px;
-      text-align: center;
-    }
+        .hero-content p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
 
-    .hero-image img {
-      max-width: 100%;
-      height: auto;
-      max-height: 300px;
-      background: #EAEAFE;
-      border-radius: 32px;
-      padding: 16px;
-    }
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    .features {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+        .visual-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            animation: float 6s ease-in-out infinite;
+        }
 
-    .features h2 {
-      font-size: 2rem;
-      color: var(--heading);
-      text-align: center;
-      margin-bottom: 20px;
-    }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
 
-    .features p {
-      text-align: center;
-      max-width: 720px;
-      margin: 0 auto 40px;
-      font-size: 1rem;
-      color: var(--muted);
-    }
+        .genie-character {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 120px;
+            height: 120px;
+            background: #6366f1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bounce 2s ease-in-out infinite;
+        }
 
-    .feature-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 24px;
-      justify-content: center;
-    }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
 
-    .feature-card {
-      flex: 1 1 280px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      background: #f9f9ff;
-    }
+        .genie-character::before {
+            content: "🧞‍♂️";
+            font-size: 3rem;
+        }
 
-    .feature-card h3 {
-      font-size: 1.1rem;
-      color: var(--heading);
-      margin-bottom: 10px;
-    }
+        .robot-character {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            width: 150px;
+            height: 150px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: pulse 3s ease-in-out infinite;
+        }
 
-    .feature-card p {
-      font-size: 0.95rem;
-      color: var(--text);
-    }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
 
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      font-size: 0.9rem;
-      color: #2E2E2E;
-      border-top: 1px solid #E0E0E0;
-      margin-top: 60px;
-    }
-  </style>
+        .robot-character::before {
+            content: "🤖";
+            font-size: 4rem;
+        }
+
+        .floating-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .icon {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: floatIcon 4s ease-in-out infinite;
+        }
+
+        .icon:nth-child(1) {
+            top: 50px;
+            right: 80px;
+            animation-delay: 0s;
+        }
+
+        .icon:nth-child(2) {
+            top: 120px;
+            right: 20px;
+            animation-delay: 1s;
+        }
+
+        .icon:nth-child(3) {
+            bottom: 100px;
+            left: 50px;
+            animation-delay: 2s;
+        }
+
+        .icon:nth-child(4) {
+            top: 80px;
+            left: 120px;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(180deg); }
+        }
+
+        .chart-icon::before { content: "📊"; }
+        .bulb-icon::before { content: "💡"; }
+        .heart-icon::before { content: "💙"; }
+        .network-icon::before { content: "🔗"; }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            padding: 2rem 0;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-content p {
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 2rem 0;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .visual-container {
+                height: 300px;
+            }
+
+            .genie-character {
+                width: 80px;
+                height: 80px;
+            }
+
+            .robot-character {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        /* Hover Effects */
+        .visual-container:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
+
+        .visual-container:hover .genie-character {
+            animation-duration: 1s;
+        }
+
+        .visual-container:hover .robot-character {
+            animation-duration: 1.5s;
+        }
+    </style>
 </head>
-
 <body>
-  <!-- Header -->
-  <header>
-    <div class="brand">
-      Reco Genie
-    </div>
-    <nav>
-      <a href="product.html">Products</a>
-      <a href="mailto:hello@recogenie.com">Contact</a>
-      <a href="product.html" class="btn">Try Now</a>
-    </nav>
-  </header>
+    <header>
+        <nav class="container">
+            <div class="logo">Reco Genie</div>
+            <ul class="nav-links">
+                <li><a href="#products">Products</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="product.html" class="cta-button">Try Now</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-text">
-      <img src="genie.png" alt="Genie Icon" style="width: 100px; height: auto; margin-bottom: 16px;">
-      <h1>AI agents for real-world business impact</h1>
-      <p>AI SaaS for SMEs to tackle everyday challenges and boost efficiency through automation.</p>
-      <a href="product.html">Try Now</a>
-    </div>
-    <div class="hero-image">
-      <img src="robot.png" alt="AI Robot Assistant">
-    </div>
-  </section>
+    <main class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>AI agents for your business</h1>
+                <p>We provide intelligent AI agents to tackle real-world problems for small and medium businesses.</p>
+                <a href="product.html" class="cta-button">Try Now</a>
+            </div>
+            <div class="hero-visual">
+                <div class="visual-container">
+                    <div class="genie-character"></div>
+                    <div class="robot-character"></div>
+                    <div class="floating-icons">
+                        <div class="icon chart-icon"></div>
+                        <div class="icon bulb-icon"></div>
+                        <div class="icon heart-icon"></div>
+                        <div class="icon network-icon"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-  <!-- Footer -->
-  <footer>
-    &copy; 2025 Reco Genie Ltd. All rights reserved.<br>
-    483 Green Lanes, London N13 4BS – Registered in the UK
-  </footer>
+    <footer>
+        <div class="container footer-content">
+            <p>© 2025 Reco Genie Ltd, All reserved .Indreserves.</p>
+            <p>493 Green Lanes, London N13 4BS • Registered in the UK 🇬🇧 UK</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add interactive hover effects
+        const visualContainer = document.querySelector('.visual-container');
+        const icons = document.querySelectorAll('.icon');
+
+        visualContainer.addEventListener('mouseenter', () => {
+            icons.forEach((icon, index) => {
+                icon.style.animationDuration = `${2 + index * 0.5}s`;
+            });
+        });
+
+        visualContainer.addEventListener('mouseleave', () => {
+            icons.forEach(icon => {
+                icon.style.animationDuration = '4s';
+            });
+        });
+
+        // Add scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for scroll animations
+        document.querySelectorAll('.hero-content, .visual-container').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.8s ease-out';
+            observer.observe(el);
+        });
+
+        // Initialize animations on page load
+        window.addEventListener('load', () => {
+            document.querySelector('.hero-content').style.opacity = '1';
+            document.querySelector('.hero-content').style.transform = 'translateY(0)';
+            
+            setTimeout(() => {
+                document.querySelector('.visual-container').style.opacity = '1';
+                document.querySelector('.visual-container').style.transform = 'translateY(0)';
+            }, 300);
+        });
+    </script>
 </body>
 </html>
