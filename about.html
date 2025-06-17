@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About Us – Reco Genie</title>
+  <title>About Reco Genie</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #131313;
-      --panel: #1e1e1e;
-      --gold: #d4af37;
-      --text: #f8f8f8;
-      --muted: #a8a8a8;
-      --radius: 14px;
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --primary: #3b82f6;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 12px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,81 +30,261 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 28px;
-      border-bottom: 1px solid rgba(255,255,255,.06);
+      padding: 20px 40px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
     .brand a {
       font-weight: 700;
-      font-size: 1.15rem;
+      font-size: 1.5rem;
       color: var(--text);
       text-decoration: none;
     }
-    .brand a:hover { color: var(--gold); }
-    nav a.btn {
-      margin-left: 14px;
-      padding: 9px 22px;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: .92rem;
-      text-decoration: none;
-      transition: all .25s;
+    .brand a:hover { color: var(--primary); }
+    
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
     }
-    nav a.btn.primary   { background: var(--gold); color: #000; }
-    nav a.btn.primary:hover { background: #f4ce5f; }
+    
+    .nav-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    
+    .nav-link:hover {
+      color: var(--text);
+    }
+    
+    .get-started-btn {
+      background: var(--primary);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    
+    .get-started-btn:hover {
+      background: #2563eb;
+    }
+
+    /* ───────────────  MAIN CONTENT  ─────────────── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
+    .hero-section {
+      text-align: left;
+      margin-bottom: 80px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+
+    .hero-description {
+      font-size: 1.25rem;
+      color: var(--muted);
+      max-width: 800px;
+      line-height: 1.7;
+    }
 
     /* ───────────────  SECTIONS  ─────────────── */
-    section {
-      padding: 70px 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    h1 { font-size: 2.6rem; font-weight: 700; margin-bottom: 16px; }
-    h2 { font-size: 1.9rem; font-weight: 600; margin: 60px 0 18px; }
-    p.lead {
-      font-size: 1.15rem;
-      color: var(--muted);
-      max-width: 760px;
-      margin-bottom: 34px;
+    .section {
+      margin-bottom: 80px;
     }
 
-    /* ───────────────  VALUES CARDS  ─────────────── */
-    .values {
-      display: grid;
-      gap: 24px;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      margin-top: 22px;
+    .section h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 30px;
+      color: var(--text);
     }
+
+    .section p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 800px;
+    }
+
+    /* ───────────────  VALUES GRID  ─────────────── */
+    .values-grid {
+      display: grid;
+      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      margin-top: 40px;
+    }
+
     .value-card {
       background: var(--panel);
+      border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 28px 24px;
+      padding: 30px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .value-card h3   { font-size: 1.15rem; margin-bottom: 10px; }
-    .value-card p    { font-size: .93rem; color: var(--muted); }
 
-    /* ───────────────  NEW INFRA GRID  ─────────────── */
-    .infra-grid {
+    .value-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .value-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--primary);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: white;
+      font-size: 24px;
+    }
+
+    .value-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .value-card p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ───────────────  TECH STACK GRID  ─────────────── */
+    .tech-grid {
       display: grid;
-      gap: 24px;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      margin-top: 60px;
+      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      margin-top: 40px;
     }
-    .infra-card {
+
+    .tech-card {
       background: var(--panel);
+      border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 28px 24px;
+      padding: 30px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .infra-card h3   { color: var(--gold); font-size: 1.1rem; margin-bottom: 10px; }
-    .infra-card p    { font-size: .93rem; color: var(--muted); }
+
+    .tech-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .tech-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: white;
+      font-size: 24px;
+    }
+
+    .tech-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .tech-card p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
 
     /* ───────────────  FOOTER  ─────────────── */
     footer {
+      background: var(--panel);
+      border-top: 1px solid var(--border);
+      padding: 40px;
       text-align: center;
-      padding: 50px 20px 70px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
+
+    .footer-link {
       color: var(--muted);
-      font-size: .9rem;
-      border-top: 1px solid rgba(255,255,255,.05);
-      margin-top: 80px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover {
+      color: var(--text);
+    }
+
+    .footer-info {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* ───────────────  RESPONSIVE  ─────────────── */
+    @media (max-width: 768px) {
+      header {
+        padding: 20px;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .nav-links {
+        gap: 15px;
+      }
+
+      .container {
+        padding: 40px 20px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-description {
+        font-size: 1.1rem;
+      }
+
+      .values-grid,
+      .tech-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 15px;
+      }
     }
   </style>
 </head>
@@ -111,68 +292,95 @@
   <!-- ───────────────  HEADER  ─────────────── -->
   <header>
     <div class="brand">
-      <a href="index.html">Recogenie</a>
+      <a href="index.html">Reco Genie</a>
     </div>
-    <nav>
-      <a href="index.html" class="btn primary">Home</a>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="product.html" class="nav-link">Product</a>
+      <a href="mailto:hello@recogenie.com" class="get-started-btn">Get Started</a>
     </nav>
   </header>
 
   <!-- ───────────────  MAIN CONTENT  ─────────────── -->
-  <section>
-    <h1>About&nbsp;Us</h1>
-    <p class="lead">
-      Reco&nbsp;Genie builds adaptable AI agents—voice, chat, and workflow—that help businesses of every
-      size work smarter, serve customers faster, and keep operations running smoothly.
-    </p>
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <h1>About Reco Genie</h1>
+      <p class="hero-description">
+        Reco Genie is a UK-based company dedicated to providing practical AI tools to businesses, with a particular focus on small and mid-sized companies. Our mission is to empower businesses with cutting-edge AI technology that enhances efficiency, drives growth, and improves customer experiences.
+      </p>
+    </section>
 
-    <h2>Our&nbsp;Mission</h2>
-    <p>
-      To make practical AI tools available to every business—starting with small and mid-sized
-      companies—so they can serve customers better, cut busywork, and grow with confidence.
-    </p>
+    <!-- Mission Section -->
+    <section class="section">
+      <h2>Our Mission</h2>
+      <p>
+        At Reco Genie, we believe that AI should be accessible and beneficial for all businesses, regardless of size. We strive to bridge the gap between complex AI technology and everyday business needs, offering solutions that are easy to implement and deliver tangible results.
+      </p>
+    </section>
 
-    <h2>Our&nbsp;Values</h2>
-    <div class="values">
-      <div class="value-card">
-        <h3>Integrity</h3>
-        <p>We put transparency and privacy first in all decisions.</p>
+    <!-- Values Section -->
+    <section class="section">
+      <h2>Our Values</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">🛡️</div>
+          <h3>Integrity</h3>
+          <p>We operate with the highest ethical standards, ensuring transparency and reliability in all our interactions.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">👥</div>
+          <h3>Customer-First</h3>
+          <p>Our customers are at the heart of everything we do. We are committed to understanding their needs and providing exceptional support.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">💡</div>
+          <h3>Innovation</h3>
+          <p>We continuously explore and integrate the latest advancements in AI to offer cutting-edge solutions.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">⚡</div>
+          <h3>Efficiency</h3>
+          <p>We focus on delivering efficient and effective AI tools that save time and resources for our clients.</p>
+        </div>
       </div>
-      <div class="value-card">
-        <h3>Customer-first</h3>
-        <p>Product direction starts with listening to real business pain points.</p>
-      </div>
-      <div class="value-card">
-        <h3>Innovation</h3>
-        <p>We never stop exploring better ways to solve age-old problems.</p>
-      </div>
-      <div class="value-card">
-        <h3>Efficiency</h3>
-        <p>We obsess over latency, cost, and resource use so you don’t have to.</p>
-      </div>
-    </div>
+    </section>
 
-    <!-- ───────────────  NEW INFRA GRID  ─────────────── -->
-    <div class="infra-grid">
-      <div class="infra-card">
-        <h3>AWS&nbsp;Backbone</h3>
-        <p>Secure, scalable hosting on Amazon Web Services keeps your data safe and your service online 24/7.</p>
+    <!-- Technology Stack Section -->
+    <section class="section">
+      <h2>Our Technology Stack</h2>
+      <p>Reco Genie leverages a robust and secure technology stack to deliver powerful AI solutions:</p>
+      <div class="tech-grid">
+        <div class="tech-card">
+          <div class="tech-icon">☁️</div>
+          <h3>AWS</h3>
+          <p>Secure and scalable cloud hosting for our AI agents.</p>
+        </div>
+        <div class="tech-card">
+          <div class="tech-icon">🤖</div>
+          <h3>OpenAI GPT-4o</h3>
+          <p>Advanced language processing for natural and intelligent interactions.</p>
+        </div>
+        <div class="tech-card">
+          <div class="tech-icon">📞</div>
+          <h3>Twilio</h3>
+          <p>Seamless communication for real-time customer engagement.</p>
+        </div>
       </div>
-      <div class="infra-card">
-        <h3>OpenAI&nbsp;GPT-4o</h3>
-        <p>Cutting-edge language models power fast, accurate understanding and responses across our products.</p>
-      </div>
-      <div class="infra-card">
-        <h3>Twilio&nbsp;Connectivity</h3>
-        <p>Twilio’s voice and messaging APIs ensure crystal-clear conversations and seamless integrations.</p>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- ───────────────  FOOTER  ─────────────── -->
   <footer>
-    483 Green Lanes, London&nbsp;N13&nbsp;4BS · Registered in the UK.<br>
-    &copy; 2025 Reco&nbsp;Genie<sup>®</sup>. All rights reserved.
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="privacy.html" class="footer-link">Privacy Policy</a>
+      </div>
+      <div class="footer-info">
+        483 Green Lanes, London N13 4BS · Registered in the UK.<br>
+        &copy;2024 Reco Genie. All rights reserved.
+      </div>
+    </div>
   </footer>
 </body>
 </html>
