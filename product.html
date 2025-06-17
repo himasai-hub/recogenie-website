@@ -1,106 +1,471 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Morag – Reco Genie Product</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reco Genie: AI SaaS with Morag, Your Voice Assistant for Restaurants</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- Google Font + Tailwind (deferred) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
 
-  <style>
-    :root{--bg:#131313;--panel:#1e1e1e;--gold:#d4af37;--gold-light:#f7d975;--text:#f8f8f8;--muted:#a8a8a8;--radius:14px}
-    body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-    .btn{padding:12px 28px;border-radius:9999px;font-weight:600;font-size:.95rem;text-decoration:none;transition:background .25s}
-    .btn.primary{background:var(--gold);color:#000}.btn.primary:hover{background:var(--gold-light)}
-    .btn.outline{border:1px solid var(--gold);color:var(--gold)}.btn.outline:hover{background:rgba(212,175,55,.12)}
-    header{display:flex;align-items:center;padding:18px 28px;border-bottom:1px solid rgba(255,255,255,.06);position:relative}
-    .nav-links{display:flex;gap:12px;margin-left:auto} /* push nav to far‑right */
-    .hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;margin-left:auto}
-    .hamburger div{width:22px;height:3px;background:var(--gold);border-radius:2px}
-    @media(max-width:768px){.nav-links{display:none;flex-direction:column;position:absolute;top:60px;right:20px;background:var(--panel);border-radius:8px;padding:16px;box-shadow:0 6px 24px rgba(0,0,0,.4)}
-      .nav-links.show{display:flex}.hamburger{display:flex}}
-    section{padding:80px 20px;max-width:1140px;margin:0 auto}
-    h1,h2{font-weight:700}.lead{color:var(--muted)}
-  </style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #2d3748;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="25" cy="75" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .learn-more-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 15px 35px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: inline-block;
+        }
+
+        .learn-more-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Features Section */
+        .features {
+            background: white;
+            padding: 100px 0;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .feature-content h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+
+        .feature-content p {
+            color: #718096;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        .feature-image {
+            position: relative;
+            text-align: center;
+        }
+
+        .phone-mockup {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            width: 200px;
+            height: 350px;
+            border-radius: 25px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .phone-icon {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .phone-icon::before {
+            content: '📞';
+            font-size: 24px;
+        }
+
+        .user-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-icon::before {
+            content: '👤';
+            font-size: 20px;
+        }
+
+        .tablet-mockup {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+            width: 280px;
+            height: 200px;
+            border-radius: 15px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tablet-screen {
+            background: white;
+            width: 240px;
+            height: 160px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+        }
+
+        .order-line {
+            background: #f7f7f7;
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        .order-line:nth-child(1) { width: 80%; }
+        .order-line:nth-child(2) { width: 60%; }
+        .order-line:nth-child(3) { width: 90%; }
+
+        /* Call to Action Section */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .call-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 20px 50px;
+            border: 3px solid white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: inline-block;
+        }
+
+        .call-button:hover {
+            background: white;
+            color: #667eea;
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .call-info {
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 20px;
+            font-size: 1.1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .features-grid:nth-child(even) .feature-content {
+                order: 2;
+            }
+
+            .phone-mockup {
+                width: 160px;
+                height: 280px;
+            }
+
+            .tablet-mockup {
+                width: 240px;
+                height: 160px;
+            }
+
+            .tablet-screen {
+                width: 200px;
+                height: 120px;
+            }
+        }
+
+        /* Animation */
+        .feature-image {
+            animation: bounce 6s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="logo">Reco Genie</a>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="product.html" class="nav-link">Product</a>
+                    <a href="mailto:hello@recogenie.com" class="cta-button">Get Started</a>
+                </div>
+            </nav>
+        </div>
+    </header>
 
-  <!-- ╔═ HEADER ═════════════════════════════════════ -->
-  <header>
-    <div class="brand text-xl font-bold"><a href="index.html" style="text-decoration:none;color:var(--text)">Recogenie</a></div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Reco Genie: AI SaaS with Morag, Your Voice Assistant for Restaurants</h1>
+                <p>Reco Genie introduces Morag, an AI voice assistant designed to automate calls, orders, and bookings for restaurants and fast-food joints, enhancing efficiency and customer service.</p>
+                <a href="about.html" class="learn-more-btn">Learn More</a>
+            </div>
+        </div>
+    </section>
 
-    <div class="hamburger" onclick="toggleMenu()"><div></div><div></div><div></div></div>
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2>How We Boost Your Business</h2>
+            
+            <!-- Feature 1: Automated Call Handling -->
+            <div class="features-grid">
+                <div class="feature-content">
+                    <h3>Automated Call Handling</h3>
+                    <p>Morag handles incoming calls, providing information, taking orders, and managing reservations, freeing up staff to focus on in-person service.</p>
+                </div>
+                <div class="feature-image">
+                    <div class="phone-mockup">
+                        <div class="phone-icon"></div>
+                        <div class="user-icon"></div>
+                    </div>
+                </div>
+            </div>
 
-    <nav class="nav-links" id="navLinks">
-      <a href="index.html" class="btn outline">Home</a>
-      <a href="about.html"   class="btn outline">About</a>
-      <a href="mailto:hello@recogenie.com" class="btn primary">Get&nbsp;Started</a>
-    </nav>
-  </header>
+            <!-- Feature 2: Seamless Order Management -->
+            <div class="features-grid">
+                <div class="feature-image">
+                    <div class="tablet-mockup">
+                        <div class="tablet-screen">
+                            <div class="order-line"></div>
+                            <div class="order-line"></div>
+                            <div class="order-line"></div>
+                            <div class="order-line"></div>
+                            <div class="order-line"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <h3>Seamless Order Management</h3>
+                    <p>Morag integrates with your existing systems to manage orders efficiently, ensuring accuracy and reducing wait times for customers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- ╔═ HERO ═══════════════════════════════════════ -->
-  <section class="text-center">
-    <h1 class="text-4xl sm:text-5xl bg-gradient-to-r from-[var(--gold)] to-[var(--gold-light)] bg-clip-text text-transparent mb-6">
-      Meet <span class="underline decoration-[var(--gold-light)]">Morag</span><br class="hidden sm:block">
-      Your 24/7 Phone Concierge
-    </h1>
-    <p class="lead mx-auto max-w-2xl">
-      One simple phone call connects customers straight to Morag—Reco Genie’s AI voice agent that
-      <strong>books tables, takes takeaway orders,</strong> and even <strong>registers new businesses</strong> who want our service.
-    </p>
-  </section>
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your Restaurant?</h2>
+            <a href="tel:+447723307080" class="call-button">📞 Call Morag Now</a>
+            <div class="call-info">
+                <p>+44 7723 307 080</p>
+                <p>Standard network rates apply – Reco Genie adds no call charges.</p>
+            </div>
+        </div>
+    </section>
 
-  <!-- ╔═ CALL TO ACTION ═════════════════════════════ -->
-  <section class="bg-[var(--panel)] rounded-[var(--radius)] p-10 text-center mx-4 sm:mx-auto max-w-3xl">
-    <p class="uppercase tracking-widest text-[var(--gold-light)] mb-3">Call Morag now</p>
-    <a href="tel:+447723307080" class="text-4xl font-extrabold mb-2 inline-block hover:text-[var(--gold-light)]">
-      +44&nbsp;7723&nbsp;307&nbsp;080
-    </a>
-    <p class="lead mt-3">Standard network rates apply – Reco Genie adds no call charges.</p>
-    <a href="tel:+447723307080" class="btn primary mt-8 inline-block">Dial&nbsp;Morag</a>
-  </section>
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
 
-  <!-- ╔═ BENEFITS GRID ══════════════════════════════ -->
-  <section>
-    <h2 class="text-3xl mb-6">Why customers &amp; business owners love Morag</h2>
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <div class="bg-[var(--panel)] p-6 rounded-[var(--radius)]">
-        <h3 class="font-semibold mb-2">Instant bookings</h3>
-        <p class="text-sm lead">Never miss a reservation again—Morag confirms tables in seconds, even after hours.</p>
-      </div>
-      <div class="bg-[var(--panel)] p-6 rounded-[var(--radius)]">
-        <h3 class="font-semibold mb-2">Hands-free ordering</h3>
-        <p class="text-sm lead">Customers speak; Morag transcribes &amp; sends accurate orders straight to your POS.</p>
-      </div>
-      <div class="bg-[var(--panel)] p-6 rounded-[var(--radius)]">
-        <h3 class="font-semibold mb-2">Custom business sign‑up</h3>
-        <p class="text-sm lead">Potential partners call, leave details, and our sales team follows up with a demo.</p>
-      </div>
-      <div class="bg-[var(--panel)] p-6 rounded-[var(--radius)]">
-        <h3 class="font-semibold mb-2">Accent‑friendly AI</h3>
-        <p class="text-sm lead">Trained on UK &amp; international speech patterns, Morag handles diverse voices with ease.</p>
-      </div>
-      <div class="bg-[var(--panel)] p-6 rounded-[var(--radius)]">
-        <h3 class="font-semibold mb-2">No app download</h3>
-        <p class="text-sm lead">A phone number anyone can dial—perfect for walk‑ins, seniors, and busy callers.</p>
-      </div>
-      <div class="bg-[var(--panel)] p-6 rounded-[var(--radius)]">
-        <h3 class="font-semibold mb-2">24/7 availability</h3>
-        <p class="text-sm lead">Morag never sleeps, making sure you capture revenue after closing time.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ╔═ FOOTER ══════════════════════════════════════ -->
-  <footer class="text-center py-10 border-t border-white/10 text-sm text-[var(--muted)]">
-    &copy; 2025 Reco Genie Ltd. All rights reserved.<br>
-    483&nbsp;Green&nbsp;Lanes, London N13 4BS · Registered in the UK
-  </footer>
-
-  <script>
-    function toggleMenu(){document.getElementById('navLinks').classList.toggle('show')}
-  </script>
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
 </body>
 </html>
