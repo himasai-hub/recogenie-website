@@ -10,6 +10,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
+        /* Animation for result cards */
+        .result-card {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeSlideIn 0.5s forwards;
+            animation-delay: calc(var(--i, 0) * 0.1s);
+        }
+        @keyframes fadeSlideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .highlight {
+            font-weight: 600;
+            color: #4f46e5;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -821,6 +838,9 @@
                     </div>
                 </div>
                 <div id="results" class="results"></div>
+                <div id="loadingSpinner" style="display: none; text-align: center; margin-top: 20px;">
+                    <div class="spinner"></div>
+                </div>
                 <div class="footer">
                     <p>© 2025 Reco Genie Ltd, All rights reserved.</p>
                     <p>493 Green Lanes, London N13 4BS • Registered in the UK 🇬🇧</p>
@@ -829,6 +849,21 @@
         </div>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+    .spinner {
+        border: 6px solid #eee;
+        border-top: 6px solid #667eea;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto;
+    }
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    </style>
     <script>
         // Endpoint (Live environment only)
         const API_BASE_URL = "https://api.recogenie.com";
@@ -841,7 +876,11 @@
 
         // --- Updated Lookup and Result Functions ---
         async function lookupPhoneNumber(phoneNumber) {
+            const lookupUrl = `https://lookup.recogenie.com/lookup?number=${encodeURIComponent(phoneNumber)}`;
+
             const resultsDiv = document.getElementById('results');
+            const spinner = document.getElementById('loadingSpinner');
+
             if (!phoneNumber) {
                 displayError('Please enter a phone number');
                 return;
@@ -850,17 +889,20 @@
                 displayError('Invalid phone number format');
                 return;
             }
-            resultsDiv.innerHTML = '<p>🔄 Searching your records...</p>';
-            resultsDiv.classList.add('show');
+
+            resultsDiv.innerHTML = '';
+            if (spinner) spinner.style.display = 'block';
+
             try {
-                const lookupUrl = `${API_BASE_URL}/lookup?number=${encodeURIComponent(phoneNumber)}`;
                 const response = await fetch(lookupUrl, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
                     }
                 });
+
                 const data = await response.json();
+
                 if (response.ok) {
                     currentData = data;
                     displayResults(data);
@@ -875,41 +917,67 @@
                 }
             } catch (error) {
                 currentData = null;
+                console.error('Network or parsing error:', error);
                 displayError('Unable to connect to the lookup service. Please try again.');
+            } finally {
+                if (spinner) spinner.style.display = 'none';
             }
+        }
+
+        function highlightKeywords(text) {
+            // Wrap File, Date, Data (case-insensitive) in highlight span
+            return text.replace(/\b(File|Date|Data)\b/gi, '<span class="highlight">$1</span>');
         }
 
         function displayResults(data) {
             const resultsDiv = document.getElementById('results');
             let html = '';
+            // Orders Section
             if (data.orders && data.orders.length > 0) {
                 html += `
-                    <div class="result-section">
+                    <details open>
+                      <summary>Orders (${data.orders.length})</summary>
+                      <div class="result-section">
                         <h2>🧾 Order Summary</h2>
-                        ${data.orders.map(order => `
-                            <div class="result-content">${order ? escapeHtml(JSON.stringify(order, null, 2)) : 'No order details.'}</div>
+                        ${data.orders.map((order, i) => `
+                          <div class="result-card" style="--i: ${i}">
+                            <div class="record result-content">${highlightKeywords(order ? escapeHtml(JSON.stringify(order, null, 2)) : 'No order details.')}</div>
+                          </div>
                         `).join('')}
-                    </div>
+                      </div>
+                    </details>
                 `;
             }
+            // Bookings Section
             if (data.bookings && data.bookings.length > 0) {
                 html += `
-                    <div class="result-section">
+                    <details open>
+                      <summary>Bookings (${data.bookings.length})</summary>
+                      <div class="result-section">
                         <h2>📅 Table Booking</h2>
-                        ${data.bookings.map(booking => `
-                            <div class="result-content">${booking ? escapeHtml(JSON.stringify(booking, null, 2)) : 'No booking details.'}</div>
+                        ${data.bookings.map((booking, i) => `
+                          <div class="result-card" style="--i: ${i}">
+                            <div class="record result-content">${highlightKeywords(booking ? escapeHtml(JSON.stringify(booking, null, 2)) : 'No booking details.')}</div>
+                          </div>
                         `).join('')}
-                    </div>
+                      </div>
+                    </details>
                 `;
             }
+            // Transcripts Section
             if (data.transcripts && data.transcripts.length > 0) {
                 html += `
-                    <div class="result-section">
+                    <details open>
+                      <summary>Transcripts (${data.transcripts.length})</summary>
+                      <div class="result-section">
                         <h2>📃 Call Transcript</h2>
-                        ${data.transcripts.map(transcript => `
-                            <div class="transcript-content">${transcript.text ? escapeHtml(transcript.text) : escapeHtml(JSON.stringify(transcript, null, 2))}</div>
+                        ${data.transcripts.map((transcript, i) => `
+                          <div class="result-card" style="--i: ${i}">
+                            <div class="record transcript-content">${highlightKeywords(transcript.text ? escapeHtml(transcript.text) : escapeHtml(JSON.stringify(transcript, null, 2)))}</div>
+                          </div>
                         `).join('')}
-                    </div>
+                      </div>
+                    </details>
                 `;
             }
             if (!html) {
