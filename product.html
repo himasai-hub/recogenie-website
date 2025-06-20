@@ -417,7 +417,40 @@
             display: inline-block;
             margin: 10px 0;
         }
-    </style>
+</style>
+<style>
+    .toast {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: rgba(0, 0, 0, 0.85);
+        color: #fff;
+        padding: 14px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        z-index: 9999;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.4s ease;
+    }
+    .toast.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .result-section {
+        animation: fadeSlideIn 0.6s ease;
+    }
+    @keyframes fadeSlideIn {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
 </head>
 <body>
     <!-- Header -->
@@ -806,7 +839,7 @@
             return pattern.test(number);
         }
 
-        // --- New Lookup and Result Functions ---
+        // --- Updated Lookup and Result Functions ---
         async function lookupPhoneNumber(phoneNumber) {
             const resultsDiv = document.getElementById('results');
             if (!phoneNumber) {
@@ -820,7 +853,7 @@
             resultsDiv.innerHTML = '<p>🔄 Searching your records...</p>';
             resultsDiv.classList.add('show');
             try {
-                const lookupUrl = `https://api.recogenie.com/lookup?number=${encodeURIComponent(phoneNumber)}`;
+                const lookupUrl = `${API_BASE_URL}/lookup?number=${encodeURIComponent(phoneNumber)}`;
                 const response = await fetch(lookupUrl, {
                     method: 'GET',
                     headers: {
@@ -831,8 +864,8 @@
                 if (response.ok) {
                     currentData = data;
                     displayResults(data);
+                    showToast("Records retrieved successfully.");
                 } else {
-                    console.log('API returned error:', response.status, data);
                     currentData = null;
                     if (response.status === 404) {
                         displayNoResults(phoneNumber);
@@ -841,7 +874,6 @@
                     }
                 }
             } catch (error) {
-                console.error('Network or parsing error:', error);
                 currentData = null;
                 displayError('Unable to connect to the lookup service. Please try again.');
             }
@@ -890,8 +922,10 @@
 
         function displayNoResults(phoneNumber) {
             const resultsDiv = document.getElementById('results');
+            const msg = `No records found for ${phoneNumber}`;
             resultsDiv.innerHTML = `<div class="not-found">No records found for <strong>${escapeHtml(phoneNumber)}</strong>. Please ensure you called Morag from this number.</div>`;
             resultsDiv.classList.add('show');
+            showToast(msg, true);
         }
 
         function displayError(message) {
@@ -899,6 +933,17 @@
             resultsDiv.innerHTML = `<div class="not-found" style="color:#ff6b6b;background:rgba(255,107,107,0.1);">${escapeHtml(message)}</div>`;
             resultsDiv.classList.add('show');
             currentData = null;
+            showToast(message, true);
+        }
+        // Toast notification helper
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.backgroundColor = isError ? '#e53e3e' : 'rgba(0, 0, 0, 0.85)';
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
         }
 
         // Helper to escape HTML (for displaying JSON safely)
@@ -990,23 +1035,12 @@
         document.addEventListener('DOMContentLoaded', function() {
             const searchButton = document.getElementById('searchButton');
             const phoneInput = document.getElementById('phoneInput');
-
-            // For backward compatibility: if searchButton doesn't exist, try searchBtn
-            let actualSearchBtn = searchButton;
-            if (!actualSearchBtn) {
-                actualSearchBtn = document.getElementById('searchBtn');
-            }
-
+            let actualSearchBtn = searchButton || document.getElementById('searchBtn');
             if (actualSearchBtn && phoneInput) {
                 actualSearchBtn.addEventListener('click', function() {
                     const phoneNumber = phoneInput.value.trim();
-                    if (phoneNumber) {
-                        lookupPhoneNumber(phoneNumber);
-                    } else {
-                        displayError('Please enter a phone number');
-                    }
+                    lookupPhoneNumber(phoneNumber);
                 });
-
                 phoneInput.addEventListener('keypress', function(e) {
                     if (e.key === 'Enter') {
                         actualSearchBtn.click();
@@ -1015,6 +1049,7 @@
             }
         });
     </script>
+    <div id="toast" class="toast"></div>
     <!-- End Morag Call Lookup Section -->
 </body>
 </html>
