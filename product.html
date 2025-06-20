@@ -366,6 +366,56 @@
                 transform: translateY(-5px);
             }
         }
+
+        /* Guide Section Styles */
+        .guide-section {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .guide-section:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-2px);
+        }
+
+        .guide-section h3 {
+            font-size: 1.3rem;
+            margin: 0 0 15px 0;
+            font-weight: 600;
+            color: white;
+        }
+
+        .guide-content {
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .guide-content strong {
+            color: white;
+            font-weight: 600;
+        }
+
+        .menu-item {
+            margin: 5px 0;
+            padding-left: 10px;
+        }
+
+        .phone-number {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #FFD700;
+            background: rgba(255,215,0,0.1);
+            padding: 8px 15px;
+            border-radius: 25px;
+            display: inline-block;
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
@@ -432,49 +482,9 @@
                 </div>
             </div>
         </div>
-    </section>
+</section>
 
-    <!-- Call to Action Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>Ready to Transform Your Restaurant?</h2>
-            <a href="tel:+447723307080" class="call-button">📞 Call Morag Now</a>
-            <div class="call-info">
-                <p>+44 7723 307 080</p>
-                <p>Standard network rates apply – Reco Genie adds no call charges.</p>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Add scroll effect to header
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-            }
-        });
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Morag Call Lookup</title>
+    <!-- Morag Call Lookup Section -->
     <style>
         .morag-lookup {
             max-width: 800px;
@@ -488,8 +498,6 @@
             position: relative;
             overflow: hidden;
         }
-
-        /* Remove grid background, use soft gradient or nothing to visually match CTA */
         .morag-lookup::before {
             content: '';
             position: absolute;
@@ -500,17 +508,14 @@
             background: linear-gradient(135deg, rgba(118,75,162,0.15) 0%, rgba(102,126,234,0.10) 100%);
             pointer-events: none;
         }
-
         .morag-lookup * {
             position: relative;
             z-index: 1;
         }
-
         .lookup-header {
             text-align: center;
             margin-bottom: 36px;
         }
-
         .lookup-header h1 {
             font-size: 2.2rem;
             margin: 0 0 10px 0;
@@ -522,7 +527,6 @@
             text-shadow: 0 4px 8px rgba(0,0,0,0.08);
             text-align: center;
         }
-
         .lookup-header p {
             font-size: 1.1rem;
             opacity: 0.92;
@@ -530,7 +534,6 @@
             font-weight: 300;
             text-align: center;
         }
-
         .search-container {
             display: flex;
             gap: 18px;
@@ -539,7 +542,6 @@
             justify-content: center;
             align-items: center;
         }
-
         .phone-input,
         .search-btn,
         .download-btn {
@@ -553,7 +555,6 @@
             box-shadow: 0 8px 25px rgba(102,126,234,0.10);
             transition: all 0.3s ease;
         }
-
         .phone-input {
             width: 300px;
             padding: 0 22px;
@@ -562,34 +563,9 @@
             color: white;
             backdrop-filter: blur(10px);
         }
-        .date-filter {
-            padding: 0 18px;
-            border: 2px solid rgba(255,255,255,0.18);
-            background: rgba(255,255,255,0.09);
-            color: white;
-            backdrop-filter: blur(10px);
-            border-radius: 40px;
-            height: 48px;
-            font-size: 14px;
-            font-weight: 500;
-            box-shadow: 0 8px 25px rgba(102,126,234,0.10);
-            transition: all 0.3s ease;
-        }
-        .date-filter::placeholder {
-            color: rgba(255,255,255,0.7);
-        }
-        .date-filter:focus {
-            outline: none;
-            border-color: rgba(255,255,255,0.38);
-            background: rgba(255,255,255,0.15);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102,126,234,0.12);
-        }
-
         .phone-input::placeholder {
             color: rgba(255,255,255,0.7);
         }
-
         .phone-input:focus {
             outline: none;
             border-color: rgba(255,255,255,0.38);
@@ -597,7 +573,6 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(102,126,234,0.12);
         }
-
         .search-btn,
         .download-btn {
             border: 3px solid white;
@@ -606,15 +581,12 @@
             overflow: hidden;
             color: white;
         }
-
         .search-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
-
         .download-btn {
             background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
         }
-
         .search-btn:hover,
         .download-btn:hover {
             background: white;
@@ -622,31 +594,26 @@
             transform: scale(1.04);
             box-shadow: 0 15px 35px rgba(102,126,234,0.18);
         }
-
         .search-btn:active,
         .download-btn:active {
             transform: scale(1.01);
         }
-
         .results {
             margin-top: 30px;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.5s ease;
         }
-
         .results.show {
             opacity: 1;
             transform: translateY(0);
         }
-
         .loading {
             text-align: center;
             padding: 40px;
             font-size: 18px;
             color: rgba(255,255,255,0.8);
         }
-
         .loading::after {
             content: '';
             display: inline-block;
@@ -658,11 +625,9 @@
             animation: spin 1s ease-in-out infinite;
             margin-left: 10px;
         }
-
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-
         .result-section {
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
@@ -672,12 +637,10 @@
             border: 1px solid rgba(255,255,255,0.2);
             transition: all 0.3s ease;
         }
-
         .result-section:hover {
             background: rgba(255,255,255,0.15);
             transform: translateY(-2px);
         }
-
         .result-section h2 {
             font-size: 1.5rem;
             margin: 0 0 15px 0;
@@ -686,7 +649,6 @@
             gap: 10px;
             font-weight: 600;
         }
-
         .result-content {
             background: rgba(0,0,0,0.2);
             padding: 20px;
@@ -699,7 +661,6 @@
             overflow-y: auto;
             border: 1px solid rgba(255,255,255,0.1);
         }
-
         .transcript-content {
             background: rgba(0,0,0,0.2);
             padding: 20px;
@@ -712,7 +673,6 @@
             overflow-y: auto;
             border: 1px solid rgba(255,255,255,0.1);
         }
-
         .not-found {
             text-align: center;
             padding: 40px;
@@ -723,7 +683,6 @@
             border-radius: 15px;
             border: 1px solid rgba(255,107,107,0.2);
         }
-
         .footer {
             margin-top: 40px;
             text-align: center;
@@ -733,7 +692,6 @@
             border-top: 1px solid rgba(255,255,255,0.14);
             color: #f2f2f8;
         }
-
         @media (max-width: 768px) {
             .morag-lookup {
                 margin: 10px;
@@ -757,38 +715,37 @@
                 font-size: 12px;
             }
         }
-
-        /* Scrollbar styling */
         .result-content::-webkit-scrollbar,
         .transcript-content::-webkit-scrollbar {
             width: 8px;
         }
-
         .result-content::-webkit-scrollbar-track,
         .transcript-content::-webkit-scrollbar-track {
             background: rgba(255,255,255,0.1);
             border-radius: 4px;
         }
-
         .result-content::-webkit-scrollbar-thumb,
         .transcript-content::-webkit-scrollbar-thumb {
             background: rgba(255,255,255,0.3);
             border-radius: 4px;
         }
-
         .result-content::-webkit-scrollbar-thumb:hover,
         .transcript-content::-webkit-scrollbar-thumb:hover {
             background: rgba(255,255,255,0.5);
         }
     </style>
-</head>
-<body>
     <section class="cta-section" style="padding: 70px 0 70px 0;">
         <div class="container" style="max-width: unset;">
             <div class="morag-lookup">
                 <div class="lookup-header">
                     <h1>📞 Morag Call Lookup</h1>
-                    <p>Enter your phone number with country code to retrieve your call transcript, order, or booking details.</p>
+                    <p>Call Morag at +44 7723 307080 to place orders or book tables, then enter your phone number below to retrieve your call details.</p>
+                </div>
+                <div style="text-align: center; margin: 20px 0;">
+                  <a href="tel:+447723307080" 
+                     style="background: #FFD700; color: #131313; font-weight: bold; padding: 12px 24px; border-radius: 30px; text-decoration: none; font-size: 16px; box-shadow: 0 5px 12px rgba(0,0,0,0.2); display: inline-block;">
+                    📞 Call Morag Now
+                  </a>
                 </div>
                 <div class="search-container">
                     <input 
@@ -802,6 +759,33 @@
                     <button onclick="lookup()" class="search-btn">🔍 Search</button>
                     <button onclick="downloadPDF()" class="download-btn">📄 Download PDF</button>
                 </div>
+                <div class="guide-section">
+                    <h3>📚 How to Use Morag</h3>
+                    <div class="guide-content">
+                        <p><strong>Call Morag Now:</strong> <span class="phone-number">+44 7723 307080</span></p>
+                        
+                        <p><strong>🛒 Place an Order:</strong><br>
+                        Say something like: "I'd like to order a chicken burger and a pepperoni pizza."<br>
+                        Morag will understand your order, confirm it, and save it securely.</p>
+                        
+                        <p><strong>Menu Options:</strong></p>
+                        <div class="menu-item">• Chicken Burger (£6.49)</div>
+                        <div class="menu-item">• Veggie Burger (£5.99)</div>
+                        <div class="menu-item">• Margherita Pizza (£7.99)</div>
+                        <div class="menu-item">• Pepperoni Pizza (£8.99)</div>
+                        
+                        <p><strong>📅 Book a Table:</strong><br>
+                        Say: "I want to book a table for 4 tomorrow at 7 PM."<br>
+                        Morag will collect the time, number of guests, and confirm your reservation.</p>
+                        
+                        <p><strong>❓ General Enquiry:</strong><br>
+                        Say something like: "Are you open today?" or "Do you have vegetarian options?"<br>
+                        Morag will try to answer or guide your query.</p>
+                        
+                        <p><strong>💡 Pro Tip:</strong><br>
+                        After your call, visit this page and enter your phone number to view your transcript, order, or booking details.</p>
+                    </div>
+                </div>
                 <div id="results" class="results"></div>
                 <div class="footer">
                     <p>© 2025 Reco Genie Ltd, All rights reserved.</p>
@@ -810,7 +794,6 @@
             </div>
         </div>
     </section>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
         // Endpoint (Live environment only)
@@ -992,5 +975,6 @@
             e.target.value = value;
         });
     </script>
+    <!-- End Morag Call Lookup Section -->
 </body>
 </html>
