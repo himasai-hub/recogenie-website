@@ -756,8 +756,8 @@
                         autocomplete="tel"
                         style="width: 340px;"
                     />
-                    <button onclick="lookup()" class="search-btn">🔍 Search</button>
-                    <button onclick="downloadPDF()" class="download-btn">📄 Download PDF</button>
+                    <button id="searchBtn" class="search-btn" type="button">🔍 Search</button>
+                    <button id="downloadBtn" class="download-btn" type="button">📄 Download PDF</button>
                 </div>
                 <div class="guide-section">
                     <h3>📚 How to Use Morag</h3>
@@ -800,12 +800,21 @@
         const API_BASE_URL = "https://api.recogenie.com";
         let currentData = null;
 
-        async function lookup() {
+        function isValidPhoneNumber(number) {
+            const pattern = /^\+?\d{10,15}$/;
+            return pattern.test(number);
+        }
+
+        async function performLookup() {
             const phone = document.getElementById('phoneInput').value.trim();
             const resultsDiv = document.getElementById('results');
-            
+
             if (!phone) {
                 showError('Please enter a phone number');
+                return;
+            }
+            if (!isValidPhoneNumber(phone)) {
+                showError('Invalid phone number format');
                 return;
             }
 
@@ -817,7 +826,7 @@
                 // Live environment only
                 const response = await fetch(`${API_BASE_URL}/lookup?number=${encodeURIComponent(phone)}`);
                 const data = await response.json();
-                
+
                 if (!response.ok) {
                     throw new Error(data.error || 'Server error occurred');
                 }
@@ -835,7 +844,7 @@
                 }
 
                 displayResults(data);
-                
+
             } catch (err) {
                 console.error('Lookup error:', err);
                 showError(`Connection error: ${err.message}`);
@@ -843,9 +852,22 @@
         }
 
         function showError(message) {
-            const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = `<div class="not-found">❌ ${message}</div>`;
-            resultsDiv.classList.add('show');
+            let errorDiv = document.getElementById('error');
+            if (!errorDiv) {
+                errorDiv = document.createElement('div');
+                errorDiv.id = 'error';
+                errorDiv.style.marginTop = '10px';
+                document.body.appendChild(errorDiv);
+            }
+            errorDiv.textContent = message;
+            errorDiv.style.backgroundColor = "#f8d7da";
+            errorDiv.style.color = "#721c24";
+            errorDiv.style.padding = "10px";
+            errorDiv.style.marginTop = "10px";
+            errorDiv.style.border = "1px solid #f5c6cb";
+            errorDiv.style.borderRadius = "4px";
+            errorDiv.style.display = 'block';
+            setTimeout(() => errorDiv.style.display = 'none', 4000);
             currentData = null;
         }
 
@@ -891,23 +913,26 @@
         }
 
         function downloadPDF() {
+            // Show loading indicator
+            const loadingIndicator = document.getElementById("loadingIndicator");
+            if (loadingIndicator) loadingIndicator.style.display = "block";
             if (!currentData) {
+                if (loadingIndicator) loadingIndicator.style.display = "none";
                 showError('No data to download. Please search first.');
                 return;
             }
-
             try {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF({ unit: "pt", format: "a4" });
-                
+
                 doc.setFontSize(16);
                 doc.text("Morag Call Lookup Results", 40, 40);
                 doc.setFontSize(10);
-                
+
                 const phone = document.getElementById('phoneInput').value;
                 doc.text(`Phone Number: ${phone}`, 40, 70);
                 doc.text(`Generated: ${new Date().toLocaleString()}`, 40, 90);
-                
+
                 let yPosition = 120;
                 const pageHeight = doc.internal.pageSize.height;
                 const margin = 40;
@@ -918,19 +943,19 @@
                         doc.setFontSize(12);
                         doc.text(title, margin, yPosition);
                         yPosition += 20;
-                        
+
                         items.forEach((item, index) => {
-                            const content = isTranscript ? 
-                                (item.text || JSON.stringify(item, null, 2)) : 
+                            const content = isTranscript ?
+                                (item.text || JSON.stringify(item, null, 2)) :
                                 JSON.stringify(item, null, 2);
-                            
+
                             const lines = doc.splitTextToSize(content, 520);
-                            
+
                             if (yPosition + (lines.length * lineHeight) > pageHeight - margin) {
                                 doc.addPage();
                                 yPosition = margin;
                             }
-                            
+
                             doc.setFontSize(10);
                             doc.text(lines, margin, yPosition);
                             yPosition += lines.length * lineHeight + 20;
@@ -941,38 +966,74 @@
                 addSection("🧾 Orders:", currentData.orders);
                 addSection("📅 Bookings:", currentData.bookings);
                 addSection("📃 Transcripts:", currentData.transcripts, true);
-                
+
                 // Add footer
                 if (yPosition + 50 > pageHeight - margin) {
                     doc.addPage();
                     yPosition = margin;
                 }
-                
+
                 doc.setFontSize(8);
                 doc.text("© 2025 Reco Genie Ltd, All rights reserved.", margin, yPosition + 30);
                 doc.text("493 Green Lanes, London N13 4BS • Registered in the UK 🇬🇧", margin, yPosition + 45);
-                
+
                 doc.save(`morag-results-${phone.replace(/[^0-9]/g, '')}.pdf`);
-                
             } catch (error) {
                 console.error('PDF generation error:', error);
                 showError('Failed to generate PDF. Please try again.');
             }
+            setTimeout(() => {
+                if (loadingIndicator) loadingIndicator.style.display = "none";
+            }, 500);
         }
 
-        // Allow Enter key to trigger search
-        document.getElementById('phoneInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                lookup();
-            }
-        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchBtn = document.getElementById('searchBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const phoneInput = document.getElementById('phoneInput');
 
-        // Phone number formatting
-        document.getElementById('phoneInput').addEventListener('input', function(e) {
-            let value = e.target.value;
-            // Basic validation - allow only numbers, +, spaces, hyphens, parentheses
-            value = value.replace(/[^0-9+\-\s()]/g, '');
-            e.target.value = value;
+            if (!searchBtn || !downloadBtn || !phoneInput) {
+                console.error("❌ Button or input elements not found in DOM.");
+                return;
+            }
+
+            // Add loading indicator to DOM
+            const loadingIndicator = document.createElement("div");
+            loadingIndicator.id = "loadingIndicator";
+            loadingIndicator.innerText = "Generating PDF...";
+            loadingIndicator.style.display = "none";
+            loadingIndicator.style.position = "fixed";
+            loadingIndicator.style.top = "10px";
+            loadingIndicator.style.right = "10px";
+            loadingIndicator.style.padding = "10px";
+            loadingIndicator.style.backgroundColor = "#ffc107";
+            loadingIndicator.style.color = "#000";
+            loadingIndicator.style.borderRadius = "4px";
+            loadingIndicator.style.fontWeight = "bold";
+            document.body.appendChild(loadingIndicator);
+
+            searchBtn.addEventListener('click', () => {
+                console.log("🔍 Search button clicked");
+                performLookup();
+            });
+
+            downloadBtn.addEventListener('click', () => {
+                console.log("📄 Download PDF button clicked");
+                downloadPDF();
+            });
+
+            phoneInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    console.log("⏎ Enter key pressed in input");
+                    performLookup();
+                }
+            });
+
+            phoneInput.addEventListener('input', function(e) {
+                let value = e.target.value;
+                value = value.replace(/[^0-9+\-\s()]/g, '');
+                e.target.value = value;
+            });
         });
     </script>
     <!-- End Morag Call Lookup Section -->
