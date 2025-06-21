@@ -848,274 +848,301 @@
             </div>
         </div>
     </section>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-    .spinner {
-        border: 6px solid #eee;
-        border-top: 6px solid #667eea;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        animation: spin 1s linear infinite;
-        margin: 0 auto;
-    }
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
+      .spinner {
+          border: 6px solid #eee;
+          border-top: 6px solid #667eea;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          animation: spin 1s linear infinite;
+          margin: 0 auto;
+      }
+      @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+      }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
-        // Endpoint (Live environment only)
-        const API_BASE_URL = "https://api.recogenie.com";
-        let currentData = null;
+      // Endpoint (Live environment only)
+      const API_BASE_URL = "https://api.recogenie.com";
+      let currentData = null;
 
-        function isValidPhoneNumber(number) {
-            const pattern = /^\+?\d{10,15}$/;
-            return pattern.test(number);
+      // --- fetchLookupData for external use (for guide/demo purposes) ---
+      async function fetchLookupData(phoneNumber) {
+        try {
+          const response = await fetch(`https://api.recogenie.com/lookup?number=${encodeURIComponent(phoneNumber)}`);
+          const data = await response.json();
+
+          if (data.success) {
+            console.log(`✅ Found ${data.total_records} records`);
+            console.log("Orders:", data.orders);
+            console.log("Bookings:", data.bookings);
+            console.log("Transcripts:", data.transcripts);
+            // You can display data on the page if needed
+          } else {
+            console.error("❌ Lookup failed:", data.error || "Unknown error");
+          }
+        } catch (error) {
+          console.error("❌ Fetch error:", error);
         }
+      }
 
-        // --- Updated Lookup and Result Functions ---
-        async function lookupPhoneNumber(phoneNumber) {
-            const lookupUrl = `https://lookup.recogenie.com/lookup?number=${encodeURIComponent(phoneNumber)}`;
+      function isValidPhoneNumber(number) {
+          const pattern = /^\+?\d{10,15}$/;
+          return pattern.test(number);
+      }
 
-            const resultsDiv = document.getElementById('results');
-            const spinner = document.getElementById('loadingSpinner');
+      // --- Updated Lookup and Result Functions ---
+      async function lookupPhoneNumber(phoneNumber) {
+          const lookupUrl = `https://lookup.recogenie.com/lookup?number=${encodeURIComponent(phoneNumber)}`;
 
-            if (!phoneNumber) {
-                displayError('Please enter a phone number');
-                return;
-            }
-            if (!isValidPhoneNumber(phoneNumber)) {
-                displayError('Invalid phone number format');
-                return;
-            }
+          const resultsDiv = document.getElementById('results');
+          const spinner = document.getElementById('loadingSpinner');
 
-            resultsDiv.innerHTML = '';
-            if (spinner) spinner.style.display = 'block';
+          if (!phoneNumber) {
+              displayError('Please enter a phone number');
+              return;
+          }
+          if (!isValidPhoneNumber(phoneNumber)) {
+              displayError('Invalid phone number format');
+              return;
+          }
 
-            try {
-                const response = await fetch(lookupUrl, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
+          resultsDiv.innerHTML = '';
+          if (spinner) spinner.style.display = 'block';
 
-                const data = await response.json();
+          try {
+              const response = await fetch(lookupUrl, {
+                  method: 'GET',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  }
+              });
 
-                if (response.ok) {
-                    currentData = data;
-                    displayResults(data);
-                    showToast("Records retrieved successfully.");
-                } else {
-                    currentData = null;
-                    if (response.status === 404) {
-                        displayNoResults(phoneNumber);
-                    } else {
-                        displayError(`Error: ${data.error || 'Unknown error occurred'}`);
-                    }
-                }
-            } catch (error) {
-                currentData = null;
-                console.error('Network or parsing error:', error);
-                displayError('Unable to connect to the lookup service. Please try again.');
-            } finally {
-                if (spinner) spinner.style.display = 'none';
-            }
-        }
+              const data = await response.json();
 
-        function highlightKeywords(text) {
-            // Wrap File, Date, Data (case-insensitive) in highlight span
-            return text.replace(/\b(File|Date|Data)\b/gi, '<span class="highlight">$1</span>');
-        }
+              if (response.ok) {
+                  currentData = data;
+                  displayResults(data);
+                  showToast("Records retrieved successfully.");
+              } else {
+                  currentData = null;
+                  if (response.status === 404) {
+                      displayNoResults(phoneNumber);
+                  } else {
+                      displayError(`Error: ${data.error || 'Unknown error occurred'}`);
+                  }
+              }
+          } catch (error) {
+              currentData = null;
+              console.error('Network or parsing error:', error);
+              displayError('Unable to connect to the lookup service. Please try again.');
+          } finally {
+              if (spinner) spinner.style.display = 'none';
+          }
+      }
 
-        function displayResults(data) {
-            const resultsDiv = document.getElementById('results');
-            let html = '';
-            // Orders Section
-            if (data.orders && data.orders.length > 0) {
-                html += `
-                    <details open>
-                      <summary>Orders (${data.orders.length})</summary>
-                      <div class="result-section">
-                        <h2>🧾 Order Summary</h2>
-                        ${data.orders.map((order, i) => `
-                          <div class="result-card" style="--i: ${i}">
-                            <div class="record result-content">${highlightKeywords(order ? escapeHtml(JSON.stringify(order, null, 2)) : 'No order details.')}</div>
-                          </div>
-                        `).join('')}
-                      </div>
-                    </details>
-                `;
-            }
-            // Bookings Section
-            if (data.bookings && data.bookings.length > 0) {
-                html += `
-                    <details open>
-                      <summary>Bookings (${data.bookings.length})</summary>
-                      <div class="result-section">
-                        <h2>📅 Table Booking</h2>
-                        ${data.bookings.map((booking, i) => `
-                          <div class="result-card" style="--i: ${i}">
-                            <div class="record result-content">${highlightKeywords(booking ? escapeHtml(JSON.stringify(booking, null, 2)) : 'No booking details.')}</div>
-                          </div>
-                        `).join('')}
-                      </div>
-                    </details>
-                `;
-            }
-            // Transcripts Section
-            if (data.transcripts && data.transcripts.length > 0) {
-                html += `
-                    <details open>
-                      <summary>Transcripts (${data.transcripts.length})</summary>
-                      <div class="result-section">
-                        <h2>📃 Call Transcript</h2>
-                        ${data.transcripts.map((transcript, i) => `
-                          <div class="result-card" style="--i: ${i}">
-                            <div class="record transcript-content">${highlightKeywords(transcript.text ? escapeHtml(transcript.text) : escapeHtml(JSON.stringify(transcript, null, 2)))}</div>
-                          </div>
-                        `).join('')}
-                      </div>
-                    </details>
-                `;
-            }
-            if (!html) {
-                displayNoResults(document.getElementById('phoneInput').value.trim());
-                return;
-            }
-            resultsDiv.innerHTML = html;
-            resultsDiv.classList.add('show');
-        }
+      function highlightKeywords(text) {
+          // Wrap File, Date, Data (case-insensitive) in highlight span
+          return text.replace(/\b(File|Date|Data)\b/gi, '<span class="highlight">$1</span>');
+      }
 
-        function displayNoResults(phoneNumber) {
-            const resultsDiv = document.getElementById('results');
-            const msg = `No records found for ${phoneNumber}`;
-            resultsDiv.innerHTML = `<div class="not-found">No records found for <strong>${escapeHtml(phoneNumber)}</strong>. Please ensure you called Morag from this number.</div>`;
-            resultsDiv.classList.add('show');
-            showToast(msg, true);
-        }
+      function displayResults(data) {
+          const resultsDiv = document.getElementById('results');
+          let html = '';
+          // Orders Section
+          if (data.orders && data.orders.length > 0) {
+              html += `
+                  <details open>
+                    <summary>Orders (${data.orders.length})</summary>
+                    <div class="result-section">
+                      <h2>🧾 Order Summary</h2>
+                      ${data.orders.map((order, i) => `
+                        <div class="result-card" style="--i: ${i}">
+                          <div class="record result-content">${highlightKeywords(order ? escapeHtml(JSON.stringify(order, null, 2)) : 'No order details.')}</div>
+                        </div>
+                      `).join('')}
+                    </div>
+                  </details>
+              `;
+          }
+          // Bookings Section
+          if (data.bookings && data.bookings.length > 0) {
+              html += `
+                  <details open>
+                    <summary>Bookings (${data.bookings.length})</summary>
+                    <div class="result-section">
+                      <h2>📅 Table Booking</h2>
+                      ${data.bookings.map((booking, i) => `
+                        <div class="result-card" style="--i: ${i}">
+                          <div class="record result-content">${highlightKeywords(booking ? escapeHtml(JSON.stringify(booking, null, 2)) : 'No booking details.')}</div>
+                        </div>
+                      `).join('')}
+                    </div>
+                  </details>
+              `;
+          }
+          // Transcripts Section
+          if (data.transcripts && data.transcripts.length > 0) {
+              html += `
+                  <details open>
+                    <summary>Transcripts (${data.transcripts.length})</summary>
+                    <div class="result-section">
+                      <h2>📃 Call Transcript</h2>
+                      ${data.transcripts.map((transcript, i) => `
+                        <div class="result-card" style="--i: ${i}">
+                          <div class="record transcript-content">${highlightKeywords(transcript.text ? escapeHtml(transcript.text) : escapeHtml(JSON.stringify(transcript, null, 2)))}</div>
+                        </div>
+                      `).join('')}
+                    </div>
+                  </details>
+              `;
+          }
+          if (!html) {
+              displayNoResults(document.getElementById('phoneInput').value.trim());
+              return;
+          }
+          resultsDiv.innerHTML = html;
+          resultsDiv.classList.add('show');
+      }
 
-        function displayError(message) {
-            const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = `<div class="not-found" style="color:#ff6b6b;background:rgba(255,107,107,0.1);">${escapeHtml(message)}</div>`;
-            resultsDiv.classList.add('show');
-            currentData = null;
-            showToast(message, true);
-        }
-        // Toast notification helper
-        function showToast(message, isError = false) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.style.backgroundColor = isError ? '#e53e3e' : 'rgba(0, 0, 0, 0.85)';
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
+      function displayNoResults(phoneNumber) {
+          const resultsDiv = document.getElementById('results');
+          const msg = `No records found for ${phoneNumber}`;
+          resultsDiv.innerHTML = `<div class="not-found">No records found for <strong>${escapeHtml(phoneNumber)}</strong>. Please ensure you called Morag from this number.</div>`;
+          resultsDiv.classList.add('show');
+          showToast(msg, true);
+      }
 
-        // Helper to escape HTML (for displaying JSON safely)
-        function escapeHtml(text) {
-            if (!text) return '';
-            return text
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-        }
+      function displayError(message) {
+          const resultsDiv = document.getElementById('results');
+          resultsDiv.innerHTML = `<div class="not-found" style="color:#ff6b6b;background:rgba(255,107,107,0.1);">${escapeHtml(message)}</div>`;
+          resultsDiv.classList.add('show');
+          currentData = null;
+          showToast(message, true);
+      }
+      // Toast notification helper
+      function showToast(message, isError = false) {
+          const toast = document.getElementById('toast');
+          toast.textContent = message;
+          toast.style.backgroundColor = isError ? '#e53e3e' : 'rgba(0, 0, 0, 0.85)';
+          toast.classList.add('show');
+          setTimeout(() => {
+              toast.classList.remove('show');
+          }, 3000);
+      }
 
-        function downloadPDF() {
-            // Show loading indicator
-            const loadingIndicator = document.getElementById("loadingIndicator");
-            if (loadingIndicator) loadingIndicator.style.display = "block";
-            if (!currentData) {
-                if (loadingIndicator) loadingIndicator.style.display = "none";
-                showError('No data to download. Please search first.');
-                return;
-            }
-            try {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF({ unit: "pt", format: "a4" });
+      // Helper to escape HTML (for displaying JSON safely)
+      function escapeHtml(text) {
+          if (!text) return '';
+          return text
+              .replace(/&/g, "&amp;")
+              .replace(/</g, "&lt;")
+              .replace(/>/g, "&gt;")
+              .replace(/"/g, "&quot;")
+              .replace(/'/g, "&#039;");
+      }
 
-                doc.setFontSize(16);
-                doc.text("Morag Call Lookup Results", 40, 40);
-                doc.setFontSize(10);
+      function downloadPDF() {
+          // Show loading indicator
+          const loadingIndicator = document.getElementById("loadingIndicator");
+          if (loadingIndicator) loadingIndicator.style.display = "block";
+          if (!currentData) {
+              if (loadingIndicator) loadingIndicator.style.display = "none";
+              showError('No data to download. Please search first.');
+              return;
+          }
+          try {
+              const { jsPDF } = window.jspdf;
+              const doc = new jsPDF({ unit: "pt", format: "a4" });
 
-                const phone = document.getElementById('phoneInput').value;
-                doc.text(`Phone Number: ${phone}`, 40, 70);
-                doc.text(`Generated: ${new Date().toLocaleString()}`, 40, 90);
+              doc.setFontSize(16);
+              doc.text("Morag Call Lookup Results", 40, 40);
+              doc.setFontSize(10);
 
-                let yPosition = 120;
-                const pageHeight = doc.internal.pageSize.height;
-                const margin = 40;
-                const lineHeight = 14;
+              const phone = document.getElementById('phoneInput').value;
+              doc.text(`Phone Number: ${phone}`, 40, 70);
+              doc.text(`Generated: ${new Date().toLocaleString()}`, 40, 90);
 
-                function addSection(title, items, isTranscript = false) {
-                    if (items && items.length > 0) {
-                        doc.setFontSize(12);
-                        doc.text(title, margin, yPosition);
-                        yPosition += 20;
+              let yPosition = 120;
+              const pageHeight = doc.internal.pageSize.height;
+              const margin = 40;
+              const lineHeight = 14;
 
-                        items.forEach((item, index) => {
-                            const content = isTranscript ?
-                                (item.text || JSON.stringify(item, null, 2)) :
-                                JSON.stringify(item, null, 2);
+              function addSection(title, items, isTranscript = false) {
+                  if (items && items.length > 0) {
+                      doc.setFontSize(12);
+                      doc.text(title, margin, yPosition);
+                      yPosition += 20;
 
-                            const lines = doc.splitTextToSize(content, 520);
+                      items.forEach((item, index) => {
+                          const content = isTranscript ?
+                              (item.text || JSON.stringify(item, null, 2)) :
+                              JSON.stringify(item, null, 2);
 
-                            if (yPosition + (lines.length * lineHeight) > pageHeight - margin) {
-                                doc.addPage();
-                                yPosition = margin;
-                            }
+                          const lines = doc.splitTextToSize(content, 520);
 
-                            doc.setFontSize(10);
-                            doc.text(lines, margin, yPosition);
-                            yPosition += lines.length * lineHeight + 20;
-                        });
-                    }
-                }
+                          if (yPosition + (lines.length * lineHeight) > pageHeight - margin) {
+                              doc.addPage();
+                              yPosition = margin;
+                          }
 
-                addSection("🧾 Orders:", currentData.orders);
-                addSection("📅 Bookings:", currentData.bookings);
-                addSection("📃 Transcripts:", currentData.transcripts, true);
+                          doc.setFontSize(10);
+                          doc.text(lines, margin, yPosition);
+                          yPosition += lines.length * lineHeight + 20;
+                      });
+                  }
+              }
 
-                // Add footer
-                if (yPosition + 50 > pageHeight - margin) {
-                    doc.addPage();
-                    yPosition = margin;
-                }
+              addSection("🧾 Orders:", currentData.orders);
+              addSection("📅 Bookings:", currentData.bookings);
+              addSection("📃 Transcripts:", currentData.transcripts, true);
 
-                doc.setFontSize(8);
-                doc.text("© 2025 Reco Genie Ltd, All rights reserved.", margin, yPosition + 30);
-                doc.text("493 Green Lanes, London N13 4BS • Registered in the UK 🇬🇧", margin, yPosition + 45);
+              // Add footer
+              if (yPosition + 50 > pageHeight - margin) {
+                  doc.addPage();
+                  yPosition = margin;
+              }
 
-                doc.save(`morag-results-${phone.replace(/[^0-9]/g, '')}.pdf`);
-            } catch (error) {
-                console.error('PDF generation error:', error);
-                showError('Failed to generate PDF. Please try again.');
-            }
-            setTimeout(() => {
-                if (loadingIndicator) loadingIndicator.style.display = "none";
-            }, 500);
-        }
+              doc.setFontSize(8);
+              doc.text("© 2025 Reco Genie Ltd, All rights reserved.", margin, yPosition + 30);
+              doc.text("493 Green Lanes, London N13 4BS • Registered in the UK 🇬🇧", margin, yPosition + 45);
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchButton = document.getElementById('searchButton');
-            const phoneInput = document.getElementById('phoneInput');
-            let actualSearchBtn = searchButton || document.getElementById('searchBtn');
-            if (actualSearchBtn && phoneInput) {
-                actualSearchBtn.addEventListener('click', function() {
-                    const phoneNumber = phoneInput.value.trim();
-                    lookupPhoneNumber(phoneNumber);
-                });
-                phoneInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        actualSearchBtn.click();
-                    }
-                });
-            }
-        });
+              doc.save(`morag-results-${phone.replace(/[^0-9]/g, '')}.pdf`);
+          } catch (error) {
+              console.error('PDF generation error:', error);
+              showError('Failed to generate PDF. Please try again.');
+          }
+          setTimeout(() => {
+              if (loadingIndicator) loadingIndicator.style.display = "none";
+          }, 500);
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+          const searchButton = document.getElementById('searchButton');
+          const phoneInput = document.getElementById('phoneInput');
+          let actualSearchBtn = searchButton || document.getElementById('searchBtn');
+          if (actualSearchBtn && phoneInput) {
+              actualSearchBtn.addEventListener('click', function() {
+                  const phoneNumber = phoneInput.value.trim();
+                  lookupPhoneNumber(phoneNumber);
+              });
+              phoneInput.addEventListener('keypress', function(e) {
+                  if (e.key === 'Enter') {
+                      actualSearchBtn.click();
+                  }
+              });
+          }
+          // Download PDF button event handler
+          const downloadBtn = document.getElementById('downloadBtn');
+          if (downloadBtn) {
+              downloadBtn.addEventListener('click', function() {
+                  downloadPDF();
+              });
+          }
+      });
     </script>
     <div id="toast" class="toast"></div>
     <!-- End Morag Call Lookup Section -->
