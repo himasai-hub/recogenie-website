@@ -1,420 +1,419 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reco Genie - AI Agents for Your Business</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reco Genie - AI Agents for Your Business</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #2d3748;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #2d3748;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-        /* Header */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #4c51bf;
-        }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #4c51bf;
+    }
 
-        .logo::before {
-            content: "";
-            margin-right: 0;
-            font-size: 0;
-        }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            align-items: center;
-        }
+    .nav-links a {
+      text-decoration: none;
+      color: #4a5568;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
 
-        .nav-links a {
-            text-decoration: none;
-            color: #4a5568;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
+    .nav-links a:hover {
+      color: #4c51bf;
+    }
 
-        .nav-links a:hover {
-            color: #4c51bf;
-        }
+    .cta-button {
+      background: linear-gradient(45deg, #4c51bf, #667eea);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
 
-        .cta-button {
-            background: linear-gradient(45deg, #4c51bf, #667eea);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(76, 81, 191, 0.3);
+    }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(76, 81, 191, 0.3);
-        }
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      padding: 4rem 0;
+      min-height: 80vh;
+    }
 
-        /* Main Content */
-        .hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            padding: 4rem 0;
-            min-height: 80vh;
-        }
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-        .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: white;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+    .hero-content p {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
 
-        .hero-content p {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        .hero-visual {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    .visual-container {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      overflow: hidden;
+      animation: float 6s ease-in-out infinite;
+    }
 
-        .visual-container {
-            position: relative;
-            width: 100%;
-            height: 400px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            overflow: hidden;
-            animation: float 6s ease-in-out infinite;
-        }
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(1deg);
+      }
+    }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(1deg); }
-        }
+    .genie-character {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 120px;
+      height: 120px;
+      background: #6366f1;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: bounce 2s ease-in-out infinite;
+    }
 
-        .genie-character {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            width: 120px;
-            height: 120px;
-            background: #6366f1;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: bounce 2s ease-in-out infinite;
-        }
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
+    .genie-character::before {
+      content: "🧞‍♂️";
+      font-size: 3rem;
+    }
 
-        .genie-character::before {
-            content: "🧞‍♂️";
-            font-size: 3rem;
-        }
+    .robot-character {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      width: 150px;
+      height: 150px;
+      background: white;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      animation: pulse 3s ease-in-out infinite;
+    }
 
-        .robot-character {
-            position: absolute;
-            bottom: 30px;
-            right: 30px;
-            width: 150px;
-            height: 150px;
-            background: white;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            animation: pulse 3s ease-in-out infinite;
-        }
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
+    .robot-character::before {
+      content: "🤖";
+      font-size: 4rem;
+    }
 
-        .robot-character::before {
-            content: "🤖";
-            font-size: 4rem;
-        }
+    .floating-icons {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
 
-        .floating-icons {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
+    .icon {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: floatIcon 4s ease-in-out infinite;
+    }
 
-        .icon {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: floatIcon 4s ease-in-out infinite;
-        }
+    .icon:nth-child(1) {
+      top: 50px;
+      right: 80px;
+      animation-delay: 0s;
+    }
 
-        .icon:nth-child(1) {
-            top: 50px;
-            right: 80px;
-            animation-delay: 0s;
-        }
+    .icon:nth-child(2) {
+      top: 120px;
+      right: 20px;
+      animation-delay: 1s;
+    }
 
-        .icon:nth-child(2) {
-            top: 120px;
-            right: 20px;
-            animation-delay: 1s;
-        }
+    .icon:nth-child(3) {
+      bottom: 100px;
+      left: 50px;
+      animation-delay: 2s;
+    }
 
-        .icon:nth-child(3) {
-            bottom: 100px;
-            left: 50px;
-            animation-delay: 2s;
-        }
+    .icon:nth-child(4) {
+      top: 80px;
+      left: 120px;
+      animation-delay: 0.5s;
+    }
 
-        .icon:nth-child(4) {
-            top: 80px;
-            left: 120px;
-            animation-delay: 0.5s;
-        }
+    @keyframes floatIcon {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-15px) rotate(180deg);
+      }
+    }
 
-        @keyframes floatIcon {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(180deg); }
-        }
+    .chart-icon::before { content: "📊"; }
+    .bulb-icon::before { content: "💡"; }
+    .heart-icon::before { content: "💙"; }
+    .network-icon::before { content: "🔗"; }
 
-        .chart-icon::before { content: "📊"; }
-        .bulb-icon::before { content: "💡"; }
-        .heart-icon::before { content: "💙"; }
-        .network-icon::before { content: "🔗"; }
+    footer {
+      background: rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      text-align: center;
+      padding: 2rem 0;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 2rem;
+    }
 
-        /* Footer */
-        footer {
-            background: rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            text-align: center;
-            padding: 2rem 0;
-            color: rgba(255, 255, 255, 0.8);
-            margin-top: 2rem;
-        }
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
 
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
+    .footer-content p {
+      font-size: 0.9rem;
+    }
 
-        .footer-content p {
-            font-size: 0.9rem;
-        }
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 2rem 0;
+      }
 
-            .hero {
-                grid-template-columns: 1fr;
-                text-align: center;
-                padding: 2rem 0;
-            }
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
 
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
+      .visual-container {
+        height: 300px;
+      }
 
-            .visual-container {
-                height: 300px;
-            }
+      .genie-character {
+        width: 80px;
+        height: 80px;
+      }
 
-            .genie-character {
-                width: 80px;
-                height: 80px;
-            }
+      .robot-character {
+        width: 100px;
+        height: 100px;
+      }
+    }
 
-            .robot-character {
-                width: 100px;
-                height: 100px;
-            }
-        }
+    .visual-container:hover {
+      transform: scale(1.02);
+      transition: transform 0.3s ease;
+    }
 
-        /* Hover Effects */
-        .visual-container:hover {
-            transform: scale(1.02);
-            transition: transform 0.3s ease;
-        }
+    .visual-container:hover .genie-character {
+      animation-duration: 1s;
+    }
 
-        .visual-container:hover .genie-character {
-            animation-duration: 1s;
-        }
-
-        .visual-container:hover .robot-character {
-            animation-duration: 1.5s;
-        }
-    </style>
+    .visual-container:hover .robot-character {
+      animation-duration: 1.5s;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo">Reco Genie</div>
-            <ul class="nav-links">
-                <li><a href="product.html">Products</a></li>
-                <li><a href="about.html">Features</a></li>
-                <li><a href="mailto:hello@recogenie.com">Contact Us</a></li>
-                <li><a href="product.html" class="cta-button">Try Now</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <nav class="container">
+      <div class="logo">Reco Genie</div>
+      <ul class="nav-links">
+        <li><a href="product.html">Products</a></li>
+        <li><a href="about.html">Features</a></li>
+        <li><a href="mailto:hello@recogenie.com">Contact Us</a></li>
+        <li><a href="waitlist.html">Join Waitlist</a></li>
+        <li><a href="product.html" class="cta-button">Try Now</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <main class="container">
-        <section class="hero">
-            <div class="hero-content">
-                <h1>AI agents for your business</h1>
-                <p>We provide intelligent AI agents to tackle real-world problems for small and medium businesses.</p>
-                <a href="product.html" class="cta-button">Try Now</a>
-            </div>
-            <div class="hero-visual">
-                <div class="visual-container">
-                    <div class="genie-character"></div>
-                    <div class="robot-character"></div>
-                    <div class="floating-icons">
-                        <div class="icon chart-icon"></div>
-                        <div class="icon bulb-icon"></div>
-                        <div class="icon heart-icon"></div>
-                        <div class="icon network-icon"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container footer-content">
-            <p>© 2025 Reco Genie Ltd, All reserved .Indreserves.</p>
-            <p>493 Green Lanes, London N13 4BS • Registered in the UK 🇬🇧 UK</p>
+  <main class="container">
+    <section class="hero">
+      <div class="hero-content">
+        <h1>AI agents for your business</h1>
+        <p>We provide intelligent AI agents to tackle real-world problems for small and medium businesses.</p>
+        <a href="product.html" class="cta-button">Try Now</a>
+        <a href="waitlist.html" class="cta-button" style="margin-left: 1rem; background: linear-gradient(45deg, #667eea, #4c51bf);">Join Waitlist</a>
+      </div>
+      <div class="hero-visual">
+        <div class="visual-container">
+          <div class="genie-character"></div>
+          <div class="robot-character"></div>
+          <div class="floating-icons">
+            <div class="icon chart-icon"></div>
+            <div class="icon bulb-icon"></div>
+            <div class="icon heart-icon"></div>
+            <div class="icon network-icon"></div>
+          </div>
         </div>
-    </footer>
+      </div>
+    </section>
+  </main>
 
-    <script>
-        // Add smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+  <footer>
+    <div class="container footer-content">
+      <p>© 2025 Reco Genie Ltd, All reserved. Indreserves.</p>
+      <p>493 Green Lanes, London N13 4BS • Registered in the UK 🇬🇧 UK</p>
+    </div>
+  </footer>
 
-        // Add interactive hover effects
-        const visualContainer = document.querySelector('.visual-container');
-        const icons = document.querySelectorAll('.icon');
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
 
-        visualContainer.addEventListener('mouseenter', () => {
-            icons.forEach((icon, index) => {
-                icon.style.animationDuration = `${2 + index * 0.5}s`;
-            });
-        });
+    const visualContainer = document.querySelector('.visual-container');
+    const icons = document.querySelectorAll('.icon');
 
-        visualContainer.addEventListener('mouseleave', () => {
-            icons.forEach(icon => {
-                icon.style.animationDuration = '4s';
-            });
-        });
+    visualContainer.addEventListener('mouseenter', () => {
+      icons.forEach((icon, index) => {
+        icon.style.animationDuration = `${2 + index * 0.5}s`;
+      });
+    });
 
-        // Add scroll-triggered animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+    visualContainer.addEventListener('mouseleave', () => {
+      icons.forEach(icon => {
+        icon.style.animationDuration = '4s';
+      });
+    });
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
 
-        // Observe elements for scroll animations
-        document.querySelectorAll('.hero-content, .visual-container').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.8s ease-out';
-            observer.observe(el);
-        });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
 
-        // Initialize animations on page load
-        window.addEventListener('load', () => {
-            document.querySelector('.hero-content').style.opacity = '1';
-            document.querySelector('.hero-content').style.transform = 'translateY(0)';
-            
-            setTimeout(() => {
-                document.querySelector('.visual-container').style.opacity = '1';
-                document.querySelector('.visual-container').style.transform = 'translateY(0)';
-            }, 300);
-        });
-    </script>
+    document.querySelectorAll('.hero-content, .visual-container').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'all 0.8s ease-out';
+      observer.observe(el);
+    });
+
+    window.addEventListener('load', () => {
+      document.querySelector('.hero-content').style.opacity = '1';
+      document.querySelector('.hero-content').style.transform = 'translateY(0)';
+      setTimeout(() => {
+        document.querySelector('.visual-container').style.opacity = '1';
+        document.querySelector('.visual-container').style.transform = 'translateY(0)';
+      }, 300);
+    });
+  </script>
 </body>
 </html>
