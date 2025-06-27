@@ -358,7 +358,7 @@
                     </div>
                 </div>
 
-                <form class="waitlist-form" id="waitlistForm">
+                <form class="waitlist-form" id="waitlistForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                     <div class="form-group">
                         <label for="name">Full Name *</label>
                         <input type="text" id="name" name="name" required placeholder="Enter your full name">
@@ -377,6 +377,7 @@
                             <option value="cariad">Cariad - Chat Assistant for WhatsApp</option>
                             <option value="both">Both Morag and Cariad</option>
                         </select>
+                        <input type="hidden" name="_subject" value="New Waitlist Signup - Reco Genie">
                     </div>
 
                     <button type="submit" class="submit-button">Join the Waitlist</button>
