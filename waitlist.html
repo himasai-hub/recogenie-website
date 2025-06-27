@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Waitlist - Reco Genie</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #4c51bf;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #4c51bf;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #4c51bf, #667eea);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(76, 81, 191, 0.3);
+        }
+
+        /* Main Content */
+        .waitlist-section {
+            padding: 4rem 0;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .waitlist-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 3rem;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .waitlist-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .waitlist-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .waitlist-header p {
+            font-size: 1.1rem;
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+        }
+
+        .assistant-options {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .assistant-options h3 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .assistant-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #4c51bf;
+            transition: transform 0.2s ease;
+        }
+
+        .assistant-card:hover {
+            transform: translateX(5px);
+        }
+
+        .assistant-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .assistant-name {
+            font-weight: bold;
+            color: #4c51bf;
+            margin-bottom: 0.5rem;
+        }
+
+        .assistant-description {
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+
+        .tagline {
+            text-align: center;
+            font-style: italic;
+            color: #667eea;
+            font-weight: 600;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 10px;
+        }
+
+        .waitlist-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4c51bf;
+            box-shadow: 0 0 0 3px rgba(76, 81, 191, 0.1);
+        }
+
+        .submit-button {
+            background: linear-gradient(45deg, #4c51bf, #667eea);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(76, 81, 191, 0.3);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            padding: 2rem 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-content p {
+            font-size: 0.9rem;
+        }
+
+        .contact-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .contact-info h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            color: white;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: #48bb78;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 1rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .waitlist-container {
+                margin: 1rem;
+                padding: 2rem;
+            }
+
+            .waitlist-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">Reco Genie</a>
+            <ul class="nav-links">
+                <li><a href="product.html">Products</a></li>
+                <li><a href="about.html">Features</a></li>
+                <li><a href="mailto:hello@recogenie.com">Contact Us</a></li>
+                <li><a href="product.html" class="cta-button">Try Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="waitlist-section">
+            <div class="waitlist-container">
+                <div class="waitlist-header">
+                    <h1>Join the Waitlist</h1>
+                    <p>Be the first to experience our AI assistants and transform your business operations.</p>
+                </div>
+
+                <div class="assistant-options">
+                    <h3>Meet Your AI Assistants:</h3>
+                    
+                    <div class="assistant-card">
+                        <div class="assistant-name">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Morag</div>
+                        <div class="assistant-description">Your strong and reliable voice assistant inspired by Scotland, handling phone orders with ease.</div>
+                    </div>
+                    
+                    <div class="assistant-card">
+                        <div class="assistant-name">💙 Cariad</div>
+                        <div class="assistant-description">Your warm and friendly chat assistant, helping on WhatsApp with bookings, updates, and support.</div>
+                    </div>
+
+                    <div class="tagline">
+                        "Let Morag handle your calls, and let Cariad take care of your chats."
+                    </div>
+                </div>
+
+                <form class="waitlist-form" id="waitlistForm">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="assistant">Which assistant interests you most? *</label>
+                        <select id="assistant" name="assistant" required>
+                            <option value="">Select an assistant</option>
+                            <option value="morag">Morag - Voice Assistant for Phone Orders</option>
+                            <option value="cariad">Cariad - Chat Assistant for WhatsApp</option>
+                            <option value="both">Both Morag and Cariad</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-button">Join the Waitlist</button>
+                </form>
+
+                <div class="success-message" id="successMessage">
+                    <strong>Thank you!</strong> You've been added to our waitlist. We'll be in touch soon!
+                </div>
+
+                <div class="contact-info">
+                    <h4>Get in Touch</h4>
+                    <p><a href="mailto:hello@recogenie.com">hello@recogenie.com</a></p>
+                    <p>493 Green Lanes, London N13 4BS</p>
+                    <p>Registered in the UK 🇬🇧</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>© 2025 Reco Genie Ltd, All rights reserved.</p>
+            <p>493 Green Lanes, London N13 4BS • Registered in the UK 🇬🇧</p>
+        </div>
+    </footer>
+
+    <script>
+        // Handle form submission
+        document.getElementById('waitlistForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                assistant: formData.get('assistant')
+            };
+            
+            // Here you would typically send the data to your backend
+            console.log('Waitlist signup:', data);
+            
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Reset form
+            this.reset();
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
+        });
+
+        // Add smooth animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Initialize animations on page load
+        window.addEventListener('load', () => {
+            const waitlistContainer = document.querySelector('.waitlist-container');
+            waitlistContainer.style.opacity = '1';
+            waitlistContainer.style.transform = 'translateY(0)';
+        });
+    </script>
+</body>
+</html>
