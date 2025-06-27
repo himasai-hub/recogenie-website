@@ -344,7 +344,7 @@
                     <h3>Meet Your AI Assistants:</h3>
                     
                     <div class="assistant-card">
-                        <div class="assistant-name">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Morag</div>
+                        <div class="assistant-name">🏴 Morag</div>
                         <div class="assistant-description">Your strong and reliable voice assistant inspired by Scotland, handling phone orders with ease.</div>
                     </div>
                     
@@ -358,7 +358,7 @@
                     </div>
                 </div>
 
-                <form class="waitlist-form" id="waitlistForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <form class="waitlist-form" id="waitlistForm" action="https://formspree.io/f/xvgrdgwz" method="POST">
                     <div class="form-group">
                         <label for="name">Full Name *</label>
                         <input type="text" id="name" name="name" required placeholder="Enter your full name">
@@ -405,33 +405,6 @@
     </footer>
 
     <script>
-        // Handle form submission
-        document.getElementById('waitlistForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                assistant: formData.get('assistant')
-            };
-            
-            // Here you would typically send the data to your backend
-            console.log('Waitlist signup:', data);
-            
-            // Show success message
-            document.getElementById('successMessage').style.display = 'block';
-            
-            // Reset form
-            this.reset();
-            
-            // Hide success message after 5 seconds
-            setTimeout(() => {
-                document.getElementById('successMessage').style.display = 'none';
-            }, 5000);
-        });
-
         // Add smooth animations on scroll
         const observerOptions = {
             threshold: 0.1,
